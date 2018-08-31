@@ -4,9 +4,6 @@ import cc.funkemunky.funkephase.FunkePhase;
 import cc.funkemunky.funkephase.util.BlockUtils;
 import cc.funkemunky.funkephase.util.BoundingBox;
 import cc.funkemunky.funkephase.util.MathUtils;
-import cc.funkemunky.funkephase.util.ReflectionsUtil;
-
-import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +14,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -33,16 +29,16 @@ public class PhaseListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPhase(PlayerMoveEvent e) {
-        if(FunkePhase.instance.toggled) {
+        if (FunkePhase.instance.toggled) {
             Player player = e.getPlayer();
 
-            if(player.getAllowFlight()
+            if (player.getAllowFlight()
                     || player.getVehicle() != null
                     || MathUtils.elapsed(lastDoorSwing.getOrDefault(player, 0L)) < 500) {
                 return;
             }
 
-            if(e.getFrom().distance(e.getTo()) > FunkePhase.instance.maxMove) {
+            if (e.getFrom().distance(e.getTo()) > FunkePhase.instance.maxMove) {
                 e.setTo(e.getFrom());
                 return;
             }
@@ -50,7 +46,7 @@ public class PhaseListener implements Listener {
             float minX = (float) Math.min(e.getFrom().getX(), e.getTo().getX()), minY = (float) Math.min(e.getFrom().getY(), e.getTo().getY()), minZ = (float) Math.min(e.getFrom().getZ(), e.getTo().getZ()),
                     maxX = (float) Math.max(e.getFrom().getX(), e.getTo().getX()), maxY = (float) Math.max(e.getFrom().getY(), e.getTo().getY()), maxZ = (float) Math.max(e.getFrom().getZ(), e.getTo().getZ());
 
-            BoundingBox box = new BoundingBox(minX, minY, minZ, maxX, maxY, maxZ).add(0,0,0,0,1.8f,0);
+            BoundingBox box = new BoundingBox(minX, minY, minZ, maxX, maxY, maxZ).add(0, 0, 0, 0, 1.8f, 0);
 
             final List<String> blocks = new ArrayList<>();
             List<Block> colliding = box.getCollidingBlocks(e.getPlayer());
@@ -65,9 +61,9 @@ public class PhaseListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
-        if(event.getAction() == Action.RIGHT_CLICK_BLOCK
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK
                 && FunkePhase.instance.toggled) {
-            if((BlockUtils.isDoor(event.getClickedBlock())
+            if ((BlockUtils.isDoor(event.getClickedBlock())
                     || BlockUtils.isFenceGate(event.getClickedBlock())
                     || BlockUtils.isTrapDoor(event.getClickedBlock()))
                     && !event.isCancelled()) {

@@ -9,7 +9,6 @@ import com.google.common.collect.Sets;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -47,7 +46,7 @@ public class FunkePhase extends JavaPlugin {
                 Material material = Material.getMaterial(string);
 
                 excludedBlocks.add(material);
-            } catch(NullPointerException e) {
+            } catch (NullPointerException e) {
                 throw new NullPointerException("The material '" + string + "' in the config does not exist!");
             }
         });
@@ -64,7 +63,7 @@ public class FunkePhase extends JavaPlugin {
                 Material material = Material.getMaterial(string);
 
                 excludedBlocks.add(material);
-            } catch(NullPointerException e) {
+            } catch (NullPointerException e) {
                 throw new NullPointerException("The material '" + string + "' in the config does not exist!");
             }
         });
@@ -80,7 +79,7 @@ public class FunkePhase extends JavaPlugin {
 
     public String formatArrayToString(List<String> array) {
         StringBuilder toReturn = new StringBuilder();
-        for(int i = 0 ; i < array.size() ; i++) {
+        for (int i = 0; i < array.size(); i++) {
             String string = array.get(i);
 
             toReturn.append(string).append(array.size() - i > 1 ? ", " : "");

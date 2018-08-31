@@ -17,14 +17,14 @@ import java.util.logging.Level;
 
 public class ReflectionsUtil {
     private static String version = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",")[3];
-    private static Class<?> iBlockData;
-    private static Class<?> blockPosition;
-    private static Class<?> worldServer = getNMSClass("WorldServer");
-    private static Class<?> vanillaBlock = getNMSClass("Block");
     private static final Class<?> CraftWorld = ReflectionsUtil.getCBClass("CraftWorld");
     private static final Class<?> World = ReflectionsUtil.getNMSClass("World");
     private static final Method getCubes = ReflectionsUtil.getMethod(World, "a", ReflectionsUtil.getNMSClass("AxisAlignedBB"));
     private static final Method getCubes1_12 = ReflectionsUtil.getMethod(World, "getCubes", ReflectionsUtil.getNMSClass("Entity"), ReflectionsUtil.getNMSClass("AxisAlignedBB"));
+    private static Class<?> iBlockData;
+    private static Class<?> blockPosition;
+    private static Class<?> worldServer = getNMSClass("WorldServer");
+    private static Class<?> vanillaBlock = getNMSClass("Block");
 
     public ReflectionsUtil() {
         if (!isBukkitVerison("1_7")) {
@@ -32,6 +32,7 @@ public class ReflectionsUtil {
             blockPosition = getNMSClass("BlockPosition");
         }
     }
+
     public static BoundingBox getBlockBoundingBox(Block block) {
         try {
             if (!isBukkitVerison("1_7") && blockPosition != null) {
@@ -56,7 +57,7 @@ public class ReflectionsUtil {
                             } else {
                                 box = box.add(0, 0f, 0, 0, 0.5f, 0);
                             }
-                        } else if(block.getType().equals(Material.WOOD_STEP)) {
+                        } else if (block.getType().equals(Material.WOOD_STEP)) {
                             WoodenStep slab = (WoodenStep) block.getType().getNewData(block.getData());
 
                             box.minY = block.getY();
@@ -81,7 +82,7 @@ public class ReflectionsUtil {
                             } else {
                                 box = box.add(0, 0f, 0, 0, 0.5f, 0);
                             }
-                        } else if(block.getType().equals(Material.WOOD_STEP)) {
+                        } else if (block.getType().equals(Material.WOOD_STEP)) {
                             WoodenStep slab = (WoodenStep) block.getType().getNewData(block.getData());
 
                             box.minY = block.getY();
@@ -178,6 +179,7 @@ public class ReflectionsUtil {
         }
         return null;
     }
+
     public static Field getFieldByName(Class<?> clazz, String fieldName) {
         try {
             Field field = clazz.getDeclaredField(fieldName);
@@ -190,7 +192,9 @@ public class ReflectionsUtil {
         }
     }
 
-    /** Method removed in 1.12 and later versions in NMS **/
+    /**
+     * Method removed in 1.12 and later versions in NMS
+     **/
     public static Collection<?> getCollidingBlocks(Player player, Object axisAlignedBB) {
         Object world = ReflectionsUtil.getMethodValue(ReflectionsUtil.getMethod(CraftWorld, "getHandle"), player.getWorld());
         return (Collection<?>) (isNewVersion() ? ReflectionsUtil.getMethodValue(getCubes1_12, world, null, axisAlignedBB) : ReflectionsUtil.getMethodValue(getCubes, world, axisAlignedBB));
@@ -256,6 +260,7 @@ public class ReflectionsUtil {
         double z = (double) getFieldValue(getFieldByName(box.getClass(), "f"), box);
         return new Vector(x, y, z);
     }
+
     public static BoundingBox toBoundingBox(Object aaBB) {
         Vector min = getBoxMin(aaBB);
         Vector max = getBoxMax(aaBB);

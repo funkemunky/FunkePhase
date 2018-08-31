@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
@@ -106,8 +105,8 @@ public class BoundingBox {
                 for (int y = minY - 1; y < maxY; y++) {
                     Block block = new Location(player.getWorld(), x, y, z).getBlock();
                     if (BlockUtils.isSolid(block)) {
-                        if(BlockUtils.collisionBoundingBoxes.containsKey(block.getType())) {
-                            for(BoundingBox box : BlockUtils.getBlockBoundingBox(block)) {
+                        if (BlockUtils.collisionBoundingBoxes.containsKey(block.getType())) {
+                            for (BoundingBox box : BlockUtils.getBlockBoundingBox(block)) {
                                 if (intersectsWithBox(box)) {
                                     toReturn.add(box);
                                     break;
@@ -149,8 +148,8 @@ public class BoundingBox {
                 for (int y = minY - 1; y < maxY; y++) {
                     Block block = new Location(player.getWorld(), x, y, z).getBlock();
                     if (BlockUtils.isSolid(block)) {
-                        if(BlockUtils.collisionBoundingBoxes.containsKey(block.getType())) {
-                            for(BoundingBox box : BlockUtils.getBlockBoundingBox(block)) {
+                        if (BlockUtils.collisionBoundingBoxes.containsKey(block.getType())) {
+                            for (BoundingBox box : BlockUtils.getBlockBoundingBox(block)) {
                                 if (intersectsWithBox(box)) {
                                     toReturn.add(block);
                                 }
