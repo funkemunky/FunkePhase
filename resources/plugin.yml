@@ -1,0 +1,8 @@
+name: FunkePhase
+main: cc.funkemunky.funkephase.FunkePhase
+version: 1.4
+author: funkemunky
+commands:
+  funkephase:
+    description: The funke phase main command.
+    aliases: [phase, fphase]
