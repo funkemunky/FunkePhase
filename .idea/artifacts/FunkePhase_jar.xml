@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="FunkePhase:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/FunkePhase_jar</output-path>
-    <root id="archive" name="FunkePhase.jar">
-      <element id="module-output" name="FunkePhase" />
-    </root>
-  </artifact>
-</component>
