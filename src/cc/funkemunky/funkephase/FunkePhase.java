@@ -87,14 +87,12 @@ public class FunkePhase extends JavaPlugin {
         return toReturn.toString();
     }
 
-    public void alert(Player player, List<String> block) {
+    public void alert(Player player) {
         Bukkit.getOnlinePlayers().stream().filter(staff -> hasAlertsOn.contains(staff.getUniqueId())).forEach(staff -> {
             staff.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("alert_message")
-                    .replaceAll("%player%", player.getName())
-                    .replaceAll("%block%", formatArrayToString(block))));
+                    .replaceAll("%player%", player.getName())));
         });
         Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("alert_message")
-                .replaceAll("%player%", player.getName())
-                .replaceAll("%block%", formatArrayToString(block))));
+                .replaceAll("%player%", player.getName())));
     }
 }

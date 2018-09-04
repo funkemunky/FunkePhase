@@ -4,6 +4,7 @@ import cc.funkemunky.funkephase.FunkePhase;
 import cc.funkemunky.funkephase.util.BlockUtils;
 import cc.funkemunky.funkephase.util.BoundingBox;
 import cc.funkemunky.funkephase.util.MathUtils;
+import cc.funkemunky.funkephase.util.ReflectionsUtil;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +15,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -46,15 +48,11 @@ public class PhaseListener implements Listener {
             float minX = (float) Math.min(e.getFrom().getX(), e.getTo().getX()), minY = (float) Math.min(e.getFrom().getY(), e.getTo().getY()), minZ = (float) Math.min(e.getFrom().getZ(), e.getTo().getZ()),
                     maxX = (float) Math.max(e.getFrom().getX(), e.getTo().getX()), maxY = (float) Math.max(e.getFrom().getY(), e.getTo().getY()), maxZ = (float) Math.max(e.getFrom().getZ(), e.getTo().getZ());
 
-            BoundingBox box = new BoundingBox(minX, minY, minZ, maxX, maxY, maxZ).add(0, 0, 0, 0, 1.8f, 0);
+            Object box = new BoundingBox(minX, minY, minZ, maxX, maxY, maxZ).add(0f, 0f, 0f, 0f, 1.8f, 0f).toAxisAlignedBB();
 
-            final List<String> blocks = new ArrayList<>();
-            List<Block> colliding = box.getCollidingBlocks(e.getPlayer());
-            colliding.stream().forEach(block -> blocks.add(block.getType().name().toLowerCase()));
-            if (colliding.stream().anyMatch(block -> !FunkePhase.instance.excludedBlocks.contains(block.getType()))) {
+            if(ReflectionsUtil.getCollidingBlocks(e.getPlayer(), box).size() > 0) {
                 e.setTo(e.getFrom());
-
-                FunkePhase.instance.alert(e.getPlayer(), blocks);
+                FunkePhase.instance.alert(e.getPlayer());
             }
         }
     }

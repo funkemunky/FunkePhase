@@ -6,8 +6,21 @@ excluded_blocks:
   - "PISTON_MOVING_PIECE"
   - "PISTON_STICKY_BASE"
   - "PISTON_BASE"
-  - "SOUL_SAND"
+  - "HOPPER"
+  - "COBBLESTONE_STAIRS"
+  - "OAK_STAIRS"
+  - "BRICK_STAIRS"
+  - "STONE_BRICK_STAIRS"
+  - "NETHER_BRICK_STAIRS"
+  - "SANDSTONE_STAIRS"
+  - "SPRUCE_STAIRS"
+  - "BIRCH_STAIRS"
+  - "JUNGLE_STAIRS"
+  - "QUARTZ_STAIRS"
+  - "ACACIA_STAIRS"
+  - "DARK_OAK_STAIRS"
+  - "RED_SANDSTONE_STAIRS"
 # The message sent to players with Phase alerts on.
-alert_message: "&8[&4!&8] &c%player% &7was caught phasing/vclipping. &8[&c%block%&8]"
+alert_message: "&8[&4!&8] &c%player% &7was caught phasing/vclipping."
 # The max movement before a the move packet is cancelled (recommended to leave alone).
 max_move: 10
