@@ -1,6 +1,6 @@
 name: FunkePhase
 main: cc.funkemunky.funkephase.FunkePhase
-version: 1.4
+version: 1.5
 author: funkemunky
 commands:
   funkephase:

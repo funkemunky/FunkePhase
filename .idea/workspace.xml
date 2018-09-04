@@ -7,20 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="82c61577-47f3-4b84-86fb-379263506f63" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/FunkePhase_jar/FunkePhase.jar" afterPath="$PROJECT_DIR$/out/artifacts/FunkePhase_jar/FunkePhase.jar" />
-      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/FunkePhase.class" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/FunkePhase.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/listener/PhaseListener.class" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/listener/PhaseListener.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/listener/QuitListener.class" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/listener/QuitListener.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/BlockUtils.class" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/BlockUtils.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/BoundingBox.class" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/BoundingBox.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/MathUtils.class" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/MathUtils.class" />
-      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/ReflectionsUtil.class" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/ReflectionsUtil.class" />
-      <change beforePath="$PROJECT_DIR$/resources/config.yml" afterPath="$PROJECT_DIR$/resources/config.yml" />
       <change beforePath="$PROJECT_DIR$/resources/plugin.yml" afterPath="$PROJECT_DIR$/resources/plugin.yml" />
-      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java" />
-      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java" />
-      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BlockUtils.java" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BlockUtils.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -35,8 +22,8 @@
       <file leaf-file-name="FunkePhase.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+            <state relative-caret-position="1170">
+              <caret line="96" column="5" lean-forward="false" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -55,8 +42,8 @@
       <file leaf-file-name="config.yml" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="26" lean-forward="false" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+            <state relative-caret-position="270">
+              <caret line="18" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="25" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -75,7 +62,7 @@
       <file leaf-file-name="BoundingBox.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="500">
+            <state relative-caret-position="2070">
               <caret line="150" column="38" lean-forward="false" selection-start-line="150" selection-start-column="38" selection-end-line="150" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -170,7 +157,7 @@
       <file leaf-file-name="PhaseListener.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
+            <state relative-caret-position="480">
               <caret line="50" column="105" lean-forward="false" selection-start-line="50" selection-start-column="105" selection-end-line="50" selection-end-column="105" />
               <folding />
             </state>
@@ -216,10 +203,10 @@
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/commands/PhaseCommand.java" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/MathUtils.java" />
-        <option value="$PROJECT_DIR$/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BlockUtils.java" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java" />
+        <option value="$PROJECT_DIR$/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/resources/config.yml" />
       </list>
     </option>
@@ -293,10 +280,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -398,7 +385,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="1680" height="939" extended-state="6" />
+    <frame x="0" y="23" width="1680" height="938" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -760,10 +747,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/plugin.yml">
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BlockUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        <state relative-caret-position="5790">
+          <caret line="393" column="30" lean-forward="false" selection-start-line="393" selection-start-column="30" selection-end-line="393" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/ReflectionsUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2070">
+          <caret line="150" column="38" lean-forward="false" selection-start-line="150" selection-start-column="38" selection-end-line="150" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/commands/PhaseCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="34" column="79" lean-forward="false" selection-start-line="34" selection-start-column="79" selection-end-line="34" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1170">
+          <caret line="96" column="5" lean-forward="false" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="50" column="105" lean-forward="false" selection-start-line="50" selection-start-column="105" selection-end-line="50" selection-end-column="105" />
           <folding />
         </state>
       </provider>
@@ -819,60 +848,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BlockUtils.java">
+    <entry file="file://$PROJECT_DIR$/resources/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5790">
-          <caret line="393" column="30" lean-forward="false" selection-start-line="393" selection-start-column="30" selection-end-line="393" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/ReflectionsUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="29" column="38" lean-forward="false" selection-start-line="29" selection-start-column="38" selection-end-line="29" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="500">
-          <caret line="150" column="38" lean-forward="false" selection-start-line="150" selection-start-column="38" selection-end-line="150" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/commands/PhaseCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="34" column="79" lean-forward="false" selection-start-line="34" selection-start-column="79" selection-end-line="34" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="96" column="5" lean-forward="true" selection-start-line="96" selection-start-column="5" selection-end-line="96" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="50" column="105" lean-forward="false" selection-start-line="50" selection-start-column="105" selection-end-line="50" selection-end-column="105" />
+        <state relative-caret-position="30">
+          <caret line="2" column="12" lean-forward="false" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="26" lean-forward="false" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+        <state relative-caret-position="270">
+          <caret line="18" column="19" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="25" selection-end-column="12" />
           <folding />
         </state>
       </provider>
