@@ -105,17 +105,24 @@ public class BoundingBox {
                 for (int y = minY - 1; y < maxY; y++) {
                     Block block = new Location(player.getWorld(), x, y, z).getBlock();
                     if (BlockUtils.isSolid(block)) {
+                        BoundingBox blockBox = ReflectionsUtil.getBlockBoundingBox(block);
                         if (BlockUtils.collisionBoundingBoxes.containsKey(block.getType())) {
                             for (BoundingBox box : BlockUtils.getBlockBoundingBox(block)) {
+                                box.minX = box.minX == -69 ? blockBox.minX : box.minX;
+                                box.minY = box.minY == -69 ? blockBox.minY : box.minY;
+                                box.minZ = box.minZ == -69 ? blockBox.minZ : box.minZ;
+                                box.maxX = box.maxX == -69 ? blockBox.maxX : box.maxX;
+                                box.maxY = box.maxY == -69 ? blockBox.maxY : box.maxY;
+                                box.maxZ = box.maxZ == -69 ? blockBox.maxZ : box.maxZ;
+
                                 if (intersectsWithBox(box)) {
                                     toReturn.add(box);
                                     break;
                                 }
                             }
                         } else {
-                            BoundingBox box = ReflectionsUtil.getBlockBoundingBox(block);
-                            if (intersectsWithBox(box)) {
-                                toReturn.add(box);
+                            if (intersectsWithBox(blockBox)) {
+                                toReturn.add(blockBox);
                             }
                         }
                     }
@@ -146,17 +153,27 @@ public class BoundingBox {
         for (int x = minX; x < maxX; x++) {
             for (int z = minZ; z < maxZ; z++) {
                 for (int y = minY - 1; y < maxY; y++) {
-                    Block block = new Location(player.getWorld(), x, y, z).getBlock();
+                    Location loc = new Location(player.getWorld(), x, y, z);
+
+                    Block block = loc.getBlock();
                     if (BlockUtils.isSolid(block)) {
+                        BoundingBox blockBox = ReflectionsUtil.getBlockBoundingBox(block);
                         if (BlockUtils.collisionBoundingBoxes.containsKey(block.getType())) {
                             for (BoundingBox box : BlockUtils.getBlockBoundingBox(block)) {
+                                box.minX = box.minX == -69 ? blockBox.minX : box.minX;
+                                box.minY = box.minY == -69 ? blockBox.minY : box.minY;
+                                box.minZ = box.minZ == -69 ? blockBox.minZ : box.minZ;
+                                box.maxX = box.maxX == -69 ? blockBox.maxX : box.maxX;
+                                box.maxY = box.maxY == -69 ? blockBox.maxY : box.maxY;
+                                box.maxZ = box.maxZ == -69 ? blockBox.maxZ : box.maxZ;
+
                                 if (intersectsWithBox(box)) {
                                     toReturn.add(block);
+                                    break;
                                 }
                             }
                         } else {
-                            BoundingBox box = ReflectionsUtil.getBlockBoundingBox(block);
-                            if (intersectsWithBox(box)) {
+                            if (intersectsWithBox(blockBox)) {
                                 toReturn.add(block);
                             }
                         }
@@ -177,7 +194,7 @@ public class BoundingBox {
                 for (float z = (float) min.getZ(); z < max.getZ(); z++) {
                     Block block = new Location(player.getWorld(), x, y, z).getBlock();
                     if (!block.getType().equals(Material.AIR)) {
-                        all.add(new Location(player.getWorld(), x, y, z).getBlock());
+                        all.add(block);
                     }
                 }
             }
@@ -194,8 +211,13 @@ public class BoundingBox {
             BoundingBox otherBox = (BoundingBox) other;
             return otherBox.maxX > this.minX && otherBox.minX < this.maxX && otherBox.maxY > this.minY && otherBox.minY < this.maxY && otherBox.maxZ > this.minZ && otherBox.minZ < this.maxZ;
         } else {
-            BoundingBox otherBox = ReflectionsUtil.toBoundingBox(other);
-            return otherBox.maxX > this.minX && otherBox.minX < this.maxX && otherBox.maxY > this.minY && otherBox.minY < this.maxY && otherBox.maxZ > this.minZ && otherBox.minZ < this.maxZ;
+            float otherMinX = (float) ReflectionsUtil.getFieldValue(ReflectionsUtil.getFieldByName(other.getClass(), "a"), other);
+            float otherMinY = (float) ReflectionsUtil.getFieldValue(ReflectionsUtil.getFieldByName(other.getClass(), "b"), other);
+            float otherMinZ = (float) ReflectionsUtil.getFieldValue(ReflectionsUtil.getFieldByName(other.getClass(), "c"), other);
+            float otherMaxX = (float) ReflectionsUtil.getFieldValue(ReflectionsUtil.getFieldByName(other.getClass(), "d"), other);
+            float otherMaxY = (float) ReflectionsUtil.getFieldValue(ReflectionsUtil.getFieldByName(other.getClass(), "e"), other);
+            float otherMaxZ = (float) ReflectionsUtil.getFieldValue(ReflectionsUtil.getFieldByName(other.getClass(), "f"), other);
+            return otherMaxX > minX && otherMinX < maxX && otherMaxY > minY && otherMinY < maxY && otherMaxZ > minZ && otherMinZ < maxZ;
         }
     }
 
