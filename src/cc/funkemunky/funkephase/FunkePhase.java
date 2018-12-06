@@ -5,6 +5,7 @@ import cc.funkemunky.funkephase.data.DataManager;
 import cc.funkemunky.funkephase.listener.PhaseListener;
 import cc.funkemunky.funkephase.listener.QuitListener;
 import cc.funkemunky.funkephase.util.BlockUtils;
+import cc.funkemunky.funkephase.util.MiscUtils;
 import cc.funkemunky.funkephase.util.ReflectionsUtil;
 import com.google.common.collect.Sets;
 import lombok.Getter;
@@ -60,6 +61,7 @@ public class FunkePhase extends JavaPlugin {
         });
         new ReflectionsUtil();
         new BlockUtils();
+        new MiscUtils();
     }
 
     public void reloadPhase() {
