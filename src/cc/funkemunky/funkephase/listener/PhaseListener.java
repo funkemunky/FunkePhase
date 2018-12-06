@@ -26,6 +26,7 @@ public class PhaseListener implements Listener {
 
         if (player.getAllowFlight()
                 || player.getVehicle() != null
+                || !FunkePhase.getInstance().toggled
                 || MathUtils.elapsed(data.lastDoorSwing) < 500) {
             return;
         }
