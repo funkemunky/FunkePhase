@@ -57,6 +57,12 @@ public class MiscUtils {
         return ReflectionsUtil.toBoundingBox(ReflectionsUtil.getBoundingBox(entity));
     }
 
+
+    public static BoundingBox getPlayerBoxByLocation(Vector vector) {
+        Vector min = vector.subtract(new Vector(0.3, 0, 0.3)), max = vector.add(new Vector(0.3, 1.8, 0.3));
+
+        return new BoundingBox(min, max);
+    }
     public static String line(String color) {
         return color + ChatColor.STRIKETHROUGH.toString() + "-----------------------------------------------------";
     }

@@ -19,7 +19,7 @@ import java.util.WeakHashMap;
 
 public class PhaseListener implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPhase(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         PlayerData data = FunkePhase.getInstance().getDataManager().getPlayerData(player);
@@ -33,6 +33,11 @@ public class PhaseListener implements Listener {
 
         if (e.getFrom().distance(e.getTo()) > 10) {
             e.setTo(e.getFrom());
+            return;
+        }
+
+        if(data.isEnderPearlTeleport()) {
+            data.setEnderPearlTeleport(false);
             return;
         }
 

@@ -2,108 +2,16 @@ package cc.funkemunky.funkephase.util;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class BlockUtils {
 
-    public static Map<Material, BoundingBox[]> collisionBoundingBoxes;
-    public static List<Material> allowed;
+    static Map<Material, BoundingBox[]> collisionBoundingBoxes;
 
     public BlockUtils() {
         collisionBoundingBoxes = new HashMap<>();
 
         setupCollisionBB();
-
-        allowed = new ArrayList<>();
-
-        allowed.add(Material.AIR);
-        allowed.add(Material.SIGN);
-        allowed.add(Material.SIGN_POST);
-        allowed.add(Material.WALL_SIGN);
-        allowed.add(Material.SUGAR_CANE_BLOCK);
-        allowed.add(Material.WHEAT);
-        allowed.add(Material.POTATO);
-        allowed.add(Material.CARROT);
-        allowed.add(Material.STEP);
-        allowed.add(Material.WOOD_STEP);
-        allowed.add(Material.SOUL_SAND);
-        allowed.add(Material.CARPET);
-        allowed.add(Material.STONE_PLATE);
-        allowed.add(Material.WOOD_PLATE);
-        allowed.add(Material.LADDER);
-        allowed.add(Material.CHEST);
-        allowed.add(Material.WATER);
-        allowed.add(Material.STATIONARY_WATER);
-        allowed.add(Material.LAVA);
-        allowed.add(Material.STATIONARY_LAVA);
-        allowed.add(Material.REDSTONE_COMPARATOR);
-        allowed.add(Material.REDSTONE_COMPARATOR_OFF);
-        allowed.add(Material.REDSTONE_COMPARATOR_ON);
-        allowed.add(Material.IRON_PLATE);
-        allowed.add(Material.GOLD_PLATE);
-        allowed.add(Material.DAYLIGHT_DETECTOR);
-        allowed.add(Material.STONE_BUTTON);
-        allowed.add(Material.WOOD_BUTTON);
-        allowed.add(Material.HOPPER);
-        allowed.add(Material.RAILS);
-        allowed.add(Material.ACTIVATOR_RAIL);
-        allowed.add(Material.DETECTOR_RAIL);
-        allowed.add(Material.POWERED_RAIL);
-        allowed.add(Material.TRIPWIRE_HOOK);
-        allowed.add(Material.TRIPWIRE);
-        allowed.add(Material.SNOW_BLOCK);
-        allowed.add(Material.REDSTONE_TORCH_OFF);
-        allowed.add(Material.REDSTONE_TORCH_ON);
-        allowed.add(Material.DIODE_BLOCK_OFF);
-        allowed.add(Material.DIODE_BLOCK_ON);
-        allowed.add(Material.DIODE);
-        allowed.add(Material.SEEDS);
-        allowed.add(Material.MELON_SEEDS);
-        allowed.add(Material.PUMPKIN_SEEDS);
-        allowed.add(Material.DOUBLE_PLANT);
-        allowed.add(Material.LONG_GRASS);
-        allowed.add(Material.WEB);
-        allowed.add(Material.CAKE_BLOCK);
-        allowed.add(Material.SNOW);
-        allowed.add(Material.FLOWER_POT);
-        allowed.add(Material.BREWING_STAND);
-        allowed.add(Material.CAULDRON);
-        allowed.add(Material.CACTUS);
-        allowed.add(Material.WATER_LILY);
-        allowed.add(Material.RED_ROSE);
-        allowed.add(Material.ENCHANTMENT_TABLE);
-        allowed.add(Material.ENDER_PORTAL_FRAME);
-        allowed.add(Material.PORTAL);
-        allowed.add(Material.ENDER_PORTAL);
-        allowed.add(Material.ENDER_CHEST);
-        allowed.add(Material.NETHER_FENCE);
-        allowed.add(Material.NETHER_WARTS);
-        allowed.add(Material.REDSTONE_WIRE);
-        allowed.add(Material.LEVER);
-        allowed.add(Material.YELLOW_FLOWER);
-        allowed.add(Material.CROPS);
-        allowed.add(Material.WATER);
-        allowed.add(Material.LAVA);
-        allowed.add(Material.SKULL);
-        allowed.add(Material.TRAPPED_CHEST);
-        allowed.add(Material.FIRE);
-        allowed.add(Material.BROWN_MUSHROOM);
-        allowed.add(Material.RED_MUSHROOM);
-        allowed.add(Material.DEAD_BUSH);
-        allowed.add(Material.SAPLING);
-        allowed.add(Material.TORCH);
-        allowed.add(Material.MELON_STEM);
-        allowed.add(Material.PUMPKIN_STEM);
-        allowed.add(Material.COCOA);
-        allowed.add(Material.BED);
-        allowed.add(Material.BED_BLOCK);
-        allowed.add(Material.PISTON_EXTENSION);
-        allowed.add(Material.PISTON_MOVING_PIECE);
     }
 
     public static boolean isSolid(Block block) {
@@ -334,68 +242,144 @@ public class BlockUtils {
         BoundingBox box = ReflectionsUtil.getBlockBoundingBox(block);
 
         if (box != null) {
-            return new BoundingBox[]{ReflectionsUtil.getBlockBoundingBox(block), new BoundingBox(0, 0, 0, 0, 0, 0)};
+            return new BoundingBox[]{box, new BoundingBox(0, 0, 0, 0, 0, 0)};
         }
         return new BoundingBox[]{new BoundingBox(0, 0, 0, 0, 0, 0), new BoundingBox(0, 0, 0, 0, 0, 0)};
     }
 
-    public static boolean isLiquid(Block block) {
-        return block.getType() == Material.WATER || block.getType() == Material.STATIONARY_WATER || block.getType() == Material.LAVA || block.getType() == Material.STATIONARY_LAVA;
-    }
-
-    public static boolean isClimbableBlock(Block block) {
-        return block.getType() == Material.LADDER || block.getType() == Material.VINE;
-    }
-
-    public static boolean isIce(Block block) {
-        return block.getType().equals(Material.ICE) || block.getType().equals(Material.PACKED_ICE) || block.getType().equals(Material.getMaterial("FROSTED_ICE"));
-    }
-
-    public static boolean isFence(Block block) {
-        return block.getType().getId() == 85 || block.getType().getId() == 139 || block.getType().getId() == 113 || block.getTypeId() == 188 || block.getTypeId() == 189 || block.getTypeId() == 190 || block.getTypeId() == 191 || block.getTypeId() == 192;
-    }
-
     public static boolean isDoor(Block block) {
-        return block.getType().equals(Material.IRON_DOOR) || block.getType().equals(Material.IRON_DOOR_BLOCK) || block.getType().equals(Material.WOOD_DOOR) || block.getType().equals(Material.WOODEN_DOOR) || block.getTypeId() == 193 || block.getTypeId() == 194 || block.getTypeId() == 195 || block.getTypeId() == 196 || block.getTypeId() == 197 || block.getTypeId() == 324 || block.getTypeId() == 428 || block.getTypeId() == 429 || block.getTypeId() == 430 || block.getTypeId() == 431;
-    }
-
-    public static boolean isBed(Block block) {
-        return block.getType().equals(Material.BED_BLOCK) || block.getType().equals(Material.BED);
+        return block.getType().equals(Material.IRON_DOOR) || block.getType().equals(Material.getMaterial("IRON_DOOR_BLOCK")) || block.getType().equals(Material.getMaterial("WOOD_DOOR")) || block.getType().equals(Material.getMaterial("WOODEN_DOOR")) || block.getType().getId() == 193 || block.getType().getId() == 194 || block.getType().getId() == 195 || block.getType().getId() == 196 || block.getType().getId() == 197 || block.getType().getId() == 324 || block.getType().getId() == 428 || block.getType().getId() == 429 || block.getType().getId() == 430 || block.getType().getId() == 431;
     }
 
     public static boolean isTrapDoor(Block block) {
-        return block.getType().equals(Material.TRAP_DOOR) || block.getTypeId() == 167;
+        return block.getType().getId() == 96 || block.getType().getId() == 167;
     }
-
-    public static boolean isChest(Block block) {
-        return block.getType().equals(Material.TRAPPED_CHEST) || block.getType().equals(Material.CHEST) || block.getType().equals(Material.ENDER_CHEST);
-    }
-
-    public static boolean isPiston(Block block) {
-        return block.getType().equals(Material.PISTON_MOVING_PIECE) || block.getType().equals(Material.PISTON_EXTENSION) || block.getType().equals(Material.PISTON_BASE) || block.getType().equals(Material.PISTON_STICKY_BASE);
-    }
-
     public static boolean isFenceGate(Block block) {
-        return block.getType().equals(Material.FENCE_GATE) || block.getTypeId() == 183 || block.getTypeId() == 184 || block.getTypeId() == 185 || block.getTypeId() == 186 || block.getTypeId() == 187;
-    }
-
-    public static boolean isStair(Block block) {
-        return block.getType().equals(Material.ACACIA_STAIRS) || block.getType().equals(Material.BIRCH_WOOD_STAIRS) || block.getType().equals(Material.BRICK_STAIRS) || block.getType().equals(Material.COBBLESTONE_STAIRS) || block.getType().equals(Material.DARK_OAK_STAIRS) || block.getType().equals(Material.NETHER_BRICK_STAIRS) || block.getType().equals(Material.JUNGLE_WOOD_STAIRS) || block.getType().equals(Material.QUARTZ_STAIRS) || block.getType().equals(Material.SMOOTH_STAIRS) || block.getType().equals(Material.WOOD_STAIRS) || block.getType().equals(Material.SANDSTONE_STAIRS) || block.getType().equals(Material.SPRUCE_WOOD_STAIRS) || block.getTypeId() == 203 || block.getTypeId() == 180;
+        return block.getType().getId() == 107 || block.getType().getId() == 183 || block.getType().getId() == 184 || block.getType().getId() == 185 || block.getType().getId() == 186 || block.getType().getId() == 187;
     }
 
     public static boolean isSlab(Block block) {
-        return block.getTypeId() == 44 || block.getTypeId() == 126 || block.getTypeId() == 205 || block.getTypeId() == 182;
-    }
-
-    public static boolean isEdible(Material material) {
-        return material.equals(Material.COOKED_BEEF) || material.equals(Material.COOKED_CHICKEN) || material.equals(Material.COOKED_FISH) || material.equals(Material.getMaterial("COOKED_MUTTON")) || material.equals(Material.getMaterial("COOKED_RABBIT")) || material.equals(Material.ROTTEN_FLESH) || material.equals(Material.CARROT_ITEM) || material.equals(Material.CARROT) || material.equals(Material.GOLDEN_APPLE) || material.equals(Material.GOLDEN_CARROT) || material.equals(Material.GRILLED_PORK) || material.equals(Material.RAW_BEEF) || material.equals(Material.RAW_CHICKEN) || material.equals(Material.RAW_FISH) || material.equals(Material.SPIDER_EYE) || material.equals(Material.getMaterial("BEETROOT_SOUP")) || material.equals(Material.MUSHROOM_SOUP) || material.equals(Material.POTATO) || material.equals(Material.POTATO_ITEM) || material.equals(Material.BAKED_POTATO) || material.equals(Material.POISONOUS_POTATO) || material.equals(Material.PUMPKIN_PIE) || material.equals(Material.APPLE) || material.equals(Material.getMaterial("MUTTON")) || material.equals(Material.getMaterial("RABBIT")) || material.equals(Material.MELON) || material.equals(Material.getMaterial("CHORUS_FRUIT")) || material.equals(Material.COOKIE) || material.equals(Material.POTION);
+        return block.getType().getId() == 44 || block.getType().getId() == 126 || block.getType().getId() == 205 || block.getType().getId() == 182;
     }
 
     private void setupCollisionBB() {
+        collisionBoundingBoxes.put(Material.FIRE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DAYLIGHT_DETECTOR, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.375, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.STONE_PLATE, new BoundingBox[]{new BoundingBox((float) 0.0625, (float) 0.0, (float) 0.0625, (float) 0.9375, (float) 0.0625, (float) 0.9375), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.GRAVEL, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.COBBLESTONE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.ENDER_CHEST, new BoundingBox[]{new BoundingBox((float) 0.0625, (float) 0.0, (float) 0.0625, (float) 0.9375, (float) 0.875, (float) 0.9375), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.NETHER_BRICK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.PUMPKIN, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.CARROT, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.25, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.TNT, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.SAND, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.WOOD_PLATE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.SIGN_POST, new BoundingBox[]{new BoundingBox((float) 0.25, (float) 0.0, (float) 0.25, (float) 0.75, (float) 1.0, (float) 0.75), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.COCOA, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DETECTOR_RAIL, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.125, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.HARD_CLAY, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.NETHERRACK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.STONE_BUTTON, new BoundingBox[]{new BoundingBox((float) 0.3125, (float) 0.0, (float) 0.375, (float) 0.6875, (float) 0.125, (float) 0.625), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.STAINED_GLASS, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.STAINED_GLASS_PANE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.CLAY, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.ACTIVATOR_RAIL, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.125, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.QUARTZ_BLOCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.HUGE_MUSHROOM_1, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.HUGE_MUSHROOM_2, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.BEACON, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.GRASS, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DEAD_BUSH, new BoundingBox[]{new BoundingBox((float) 0.09999999403953552, (float) 0.0, (float) 0.09999999403953552, (float) 0.8999999761581421, (float) 0.800000011920929, (float) 0.8999999761581421), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.GLOWSTONE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.ICE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.BRICK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.REDSTONE_TORCH_ON, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.REDSTONE_TORCH_OFF, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.POWERED_RAIL, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.125, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DISPENSER, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.ANVIL, new BoundingBox[]{new BoundingBox((float) 0.125, (float) 0.0, (float) 0.0, (float) 0.875, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.JUKEBOX, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.FLOWER_POT, new BoundingBox[]{new BoundingBox((float) 0.3125, (float) 0.0, (float) 0.3125, (float) 0.6875, (float) 0.375, (float) 0.6875), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.EMERALD_BLOCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.STONE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.THIN_GLASS, new BoundingBox[]{new BoundingBox((float) 0.4375, (float) 0.0, (float) 0.0, (float) 0.5625, (float) 1.0, (float) 0.5625), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.BOOKSHELF, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.MYCEL, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.OBSIDIAN, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.PORTAL, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.GOLD_PLATE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.COAL_BLOCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.GOLD_BLOCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.STAINED_CLAY, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.MOB_SPAWNER, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.BEDROCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.IRON_ORE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.REDSTONE_BLOCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.SIGN, new BoundingBox[]{new BoundingBox((float) 0.25, (float) 0.0, (float) 0.25, (float) 0.75, (float) 1.0, (float) 0.75), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.IRON_PLATE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.GOLD_ORE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.POTATO, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.25, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.MOSSY_COBBLESTONE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.RAILS, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.125, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.HAY_BLOCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.HOPPER, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.TORCH, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.ENDER_PORTAL_FRAME, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.SOIL, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.9375, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.CARPET, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.0625, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.ENCHANTMENT_TABLE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.75, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DIRT, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DROPPER, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.EMERALD_ORE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.TRAPPED_CHEST, new BoundingBox[]{new BoundingBox((float) 0.0625, (float) 0.0, (float) 0.0625, (float) 0.9375, (float) 0.875, (float) 0.9375), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.REDSTONE_LAMP_ON, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.REDSTONE_LAMP_OFF, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.NETHER_WARTS, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.25, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.SPONGE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.WORKBENCH, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.SANDSTONE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DRAGON_EGG, new BoundingBox[]{new BoundingBox((float) 0.0625, (float) 0.0, (float) 0.0625, (float) 0.9375, (float) 1.0, (float) 0.9375), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.CAULDRON, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.CAKE, new BoundingBox[]{new BoundingBox((float) 0.0625, (float) 0.0, (float) 0.0625, (float) 0.9375, (float) 0.5, (float) 0.9375), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.LAPIS_BLOCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DIODE_BLOCK_OFF, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.125, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.NOTE_BLOCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.CACTUS, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.WOOL, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.COMMAND, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.ENDER_STONE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.TRIPWIRE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.15625, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.SAPLING, new BoundingBox[]{new BoundingBox((float) 0.09999999403953552, (float) 0.0, (float) 0.09999999403953552, (float) 0.8999999761581421, (float) 0.800000011920929, (float) 0.8999999761581421), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.BED, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.5625, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.PACKED_ICE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.LAPIS_ORE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.SMOOTH_BRICK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.CHEST, new BoundingBox[]{new BoundingBox((float) 0.0625, (float) 0.0, (float) 0.0625, (float) 0.9375, (float) 0.875, (float) 0.9375), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.RED_MUSHROOM, new BoundingBox[]{new BoundingBox((float) 0.30000001192092896, (float) 0.0, (float) 0.30000001192092896, (float) 0.699999988079071, (float) 0.4000000059604645, (float) 0.699999988079071), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.BROWN_MUSHROOM, new BoundingBox[]{new BoundingBox((float) 0.30000001192092896, (float) 0.0, (float) 0.30000001192092896, (float) 0.699999988079071, (float) 0.4000000059604645, (float) 0.699999988079071), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DIAMOND_BLOCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.CROPS, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.25, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.IRON_BLOCK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DIODE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.125, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.MELON, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.DIAMOND_ORE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.LEVER, new BoundingBox[]{new BoundingBox((float) 0.25, (float) 0.0, (float) 0.25, (float) 0.75, (float) 0.6000000238418579, (float) 0.75), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.SUGAR_CANE, new BoundingBox[]{new BoundingBox((float) 0.125, (float) 0.0, (float) 0.125, (float) 0.875, (float) 1.0, (float) 0.875), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.COAL_ORE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.WATER_LILY, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 0.015625, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.QUARTZ_ORE, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.GLASS, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.TRIPWIRE_HOOK, new BoundingBox[]{new BoundingBox((float) 0.0, (float) 0.0, (float) 0.0, (float) 1.0, (float) 1.0, (float) 1.0), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.WEB, new BoundingBox[]{new BoundingBox(0, 0, 0, 1, 1, 1), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.WATER, new BoundingBox[]{new BoundingBox(0, 0, 0, 1, 1, 1), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        collisionBoundingBoxes.put(Material.getMaterial("STATIONARY_WATER"), new BoundingBox[]{new BoundingBox(0, 0, 0, 1, 1, 1), new BoundingBox(0, 0, 0, 0, 0, 0)});
+        Arrays.stream(Material.values()).filter(material -> material.name().contains("STAIR")).forEach(material -> collisionBoundingBoxes.put(material, new BoundingBox[]{new BoundingBox(0, 0, 0, 1, 1f, 1), new BoundingBox(0, 0, 0, 0, 0, 0)}));
+        collisionBoundingBoxes.put(Material.getMaterial("STATIONARY_LAVA"), new BoundingBox[]{new BoundingBox(0, 0, 0, 1, 1, 1), new BoundingBox(0, 0, 0, 0, 0, 0)});
         collisionBoundingBoxes.put(Material.BREWING_STAND, new BoundingBox[]{new BoundingBox(0.4375f, 0, 0.4375f, 0.5625f, 0.875f, 0.5625f), new BoundingBox(0, 0, 0, 1f, 0.125f, 1f)});
-        Arrays.stream(Material.values()).filter(material -> material.name().contains("FENCE") && !material.name().contains("GATE")).forEach(material -> collisionBoundingBoxes.put(material, new BoundingBox[]{new BoundingBox(-69, 0, -69, -69, 1.5f, -69), new BoundingBox(0, 0, 0, 0, 0, 0)}));
-        //Arrays.stream(Material.values()).filter(material -> material.name().contains("STAIR")).forEach(material -> collisionBoundingBoxes.put(material, new BoundingBox[]{new BoundingBox(0, 0, 0, 1, 1f, 1), new BoundingBox(0, 0, 0, 0, 0, 0)}));
-        collisionBoundingBoxes.put(Material.STATIONARY_LAVA, new BoundingBox[]{new BoundingBox(0, 0, 0, 1, 1, 1), new BoundingBox(0, 0, 0, 0, 0, 0)});
+
+        Arrays.stream(Material.values()).filter(material -> material.toString().contains("FENCE") && !material.toString().contains("GATE")).forEach(material -> collisionBoundingBoxes.put(material, new BoundingBox[] {new BoundingBox(0,0,0,1,1.5f,1), new BoundingBox(0,0,0,0,0,0)}));
+        Arrays.stream(Material.values()).filter(material -> material.toString().contains("STAIRS")).forEach(material -> collisionBoundingBoxes.put(material, new BoundingBox[]{new BoundingBox(0, 0, 0, 1, 1, 1), new BoundingBox(0, 0, 0, 0, 0, 0)}));
     }
 }
 

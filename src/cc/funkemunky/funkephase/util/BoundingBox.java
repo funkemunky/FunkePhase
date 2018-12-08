@@ -3,6 +3,7 @@ package cc.funkemunky.funkephase.util;
 import com.google.common.collect.Lists;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
@@ -130,6 +131,25 @@ public class BoundingBox {
             }
         }
         return toReturn;
+    }
+    
+    public boolean isInSolidBlock(World world) {
+        int minX = MathUtils.floor(this.minX);
+        int maxX = MathUtils.floor(this.maxX + 1);
+        int minY = MathUtils.floor(this.minY);
+        int maxY = MathUtils.floor(this.maxY + 1);
+        int minZ = MathUtils.floor(this.minZ);
+        int maxZ = MathUtils.floor(this.maxZ + 1);
+        for(double x = minX ; x < maxX ; x++) {
+            for(double y = minY ; y < maxY ; y++) {
+                for(double z = minZ ; z < maxZ ; z++) {
+                    if(new Location(world, x, y, z).getBlock().getType().isSolid()) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public Vector getMinimum() {
