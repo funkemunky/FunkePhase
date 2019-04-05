@@ -39,6 +39,7 @@ public class PhaseListener implements Listener {
         long timestamp = System.currentTimeMillis();
 
         if (player.getAllowFlight()
+                || e.getTo().getWorld().getUID() != e.getFrom().getWorld().getUID()
                 || player.getVehicle() != null
                 || !FunkePhase.getInstance().toggled
                 || timestamp - data.lastTeleport < 70L
