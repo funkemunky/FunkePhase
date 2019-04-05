@@ -6,27 +6,25 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class DataManager implements Listener {
 
     /**
      * Player Object Stufff
      **/
-    private final List<PlayerData> dataObjects;
+    private final Map<UUID, PlayerData> dataObjects = new ConcurrentHashMap<>();
 
     public DataManager() {
-        dataObjects = new ArrayList<>();
-
         for (Player player : Bukkit.getOnlinePlayers()) {
             createDataObject(player);
         }
-
     }
 
     public void createDataObject(Player player) {
-        dataObjects.add(new PlayerData(player));
+        dataObjects.put(player.getUniqueId(), new PlayerData(player));
     }
 
     public void removeDataObject(PlayerData dataObject) {
@@ -34,10 +32,11 @@ public class DataManager implements Listener {
     }
 
     public PlayerData getPlayerData(Player player) {
-        for (PlayerData data : dataObjects) {
-            if (data.player == player) return data;
+        if(!dataObjects.containsKey(player.getUniqueId())) {
+           createDataObject(player);
+           return null;
         }
-        return null;
+        return dataObjects.get(player.getUniqueId());
     }
 
     @EventHandler

@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +20,29 @@ import java.util.WeakHashMap;
 
 public class PhaseListener implements Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onPlayerTeleport(PlayerTeleportEvent event) {
+        PlayerData data = FunkePhase.getInstance().getDataManager().getPlayerData(event.getPlayer());
+
+        if(data != null) {
+            data.setLastTeleport(System.currentTimeMillis());
+        }
+    }
+
+    @EventHandler(priority = EventPriority.LOW)
     public void onPhase(PlayerMoveEvent e) {
         Player player = e.getPlayer();
         PlayerData data = FunkePhase.getInstance().getDataManager().getPlayerData(player);
 
+        if(data == null) return;
+
+        long timestamp = System.currentTimeMillis();
+
         if (player.getAllowFlight()
                 || player.getVehicle() != null
                 || !FunkePhase.getInstance().toggled
-                || MathUtils.elapsed(data.lastDoorSwing) < 500) {
+                || timestamp - data.lastTeleport < 70L
+                || timestamp - data.lastDoorSwing < 500) {
             return;
         }
 
