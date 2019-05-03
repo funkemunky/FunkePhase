@@ -5,18 +5,36 @@
       <artifact name="FunkePhase:jar" />
     </artifacts-to-build>
   </component>
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/resources/plugin.yml" line="2" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="82c61577-47f3-4b84-86fb-379263506f63" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/spigot_1_8_8_R0_1_SNAPSHOT_latest.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FunkePhase.iml" beforeDir="false" afterPath="$PROJECT_DIR$/FunkePhase.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/FunkePhase_jar/FunkePhase.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/FunkePhase_jar/FunkePhase.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/FunkePhase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/FunkePhase.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/data/PlayerData.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/data/PlayerData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/listener/PhaseListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/listener/PhaseListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/listener/QuitListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/listener/QuitListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/BlockUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/BoundingBox.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/MathUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/MiscUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/PastLocation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/cc/funkemunky/funkephase/util/ReflectionsUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/FunkePhase/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/FunkePhase/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/commands/PhaseCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/commands/PhaseCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/data/PlayerData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/data/PlayerData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/QuitListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/QuitListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/ReflectionsUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/ReflectionsUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BlockUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/MathUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/MiscUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/PastLocation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/PastLocation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/ReflectionsUtil.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,34 +47,35 @@
     <session id="-1104888863">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.0" value="3" />
+          <entry key="project.opened" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="8" />
+          <entry key="java" value="11" />
           <entry key="yml" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="8" />
+          <entry key="JAVA" value="11" />
           <entry key="YAML" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="14" />
-          <entry key="java" value="661" />
-          <entry key="yml" value="1" />
+          <entry key="java" value="1050" />
+          <entry key="yml" value="32" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="661" />
+          <entry key="JAVA" value="1050" />
           <entry key="PLAIN_TEXT" value="14" />
-          <entry key="YAML" value="1" />
+          <entry key="YAML" value="32" />
         </counts>
       </usages-collector>
     </session>
@@ -66,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="70" column="31" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
+            <state relative-caret-position="468">
+              <caret line="99" column="18" lean-forward="true" selection-start-line="99" selection-start-column="18" selection-end-line="99" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -75,8 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/plugin.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            <state relative-caret-position="51">
+              <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -85,7 +104,7 @@
         <entry file="file://$PROJECT_DIR$/resources/config.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+              <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -93,7 +112,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/commands/PhaseCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
+            <state relative-caret-position="493">
               <caret line="34" column="79" selection-start-line="34" selection-start-column="79" selection-end-line="34" selection-end-column="79" />
             </state>
           </provider>
@@ -103,68 +122,33 @@
         <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/QuitListener.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
-              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="36" />
+              <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#387#388#0" expanded="true" />
+                <element signature="e#475#476#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java">
+        <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-103">
-              <caret line="108" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
+            <state relative-caret-position="162">
+              <caret line="42" column="128" selection-start-line="42" selection-start-column="128" selection-end-line="42" selection-end-column="128" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5383#5384#0" expanded="true" />
-                <element signature="e#5434#5435#0" expanded="true" />
-                <element signature="e#5468#5469#0" expanded="true" />
-                <element signature="e#5519#5520#0" expanded="true" />
-                <element signature="e#8400#8401#0" expanded="true" />
-                <element signature="e#8460#8461#0" expanded="true" />
-                <element signature="e#9800#9801#0" expanded="true" />
-                <element signature="e#9889#9890#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/ReflectionsUtil.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
-              <caret line="245" column="58" selection-start-line="245" selection-start-column="58" selection-end-line="245" selection-end-column="58" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#13303#13304#0" expanded="true" />
-                <element signature="e#13357#13358#0" expanded="true" />
-                <element signature="e#13787#13788#0" expanded="true" />
-                <element signature="e#13858#13859#0" expanded="true" />
-                <element signature="e#15777#15807#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java">
+        <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/PastLocation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="350">
-              <caret line="48" column="13" lean-forward="true" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/MiscUtils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="677">
-              <caret line="60" column="57" selection-start-line="60" selection-start-column="57" selection-end-line="60" selection-end-column="57" />
+            <state relative-caret-position="306">
+              <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -175,13 +159,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/data/PlayerData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#764#765#0" expanded="true" />
-                <element signature="e#800#801#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="170">
+              <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -206,9 +185,10 @@
       <find>MathUtil</find>
       <find>FunkePhase.instance</find>
       <find>BlockUtil</find>
-      <find>MiscUtil</find>
       <find>Mojank</find>
       <find>e</find>
+      <find>MiscUtil</find>
+      <find>alert</find>
     </findStrings>
     <replaceStrings>
       <replace>0</replace>
@@ -231,20 +211,20 @@
         <option value="$PROJECT_DIR$/resources/config.yml" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/PastLocations.java" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/data/DataManager.java" />
-        <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/PastLocation.java" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/MiscUtils.java" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java" />
-        <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/QuitListener.java" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/ReflectionsUtil.java" />
-        <option value="$PROJECT_DIR$/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/data/PlayerData.java" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java" />
+        <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/QuitListener.java" />
+        <option value="$PROJECT_DIR$/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java" />
+        <option value="$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/PastLocation.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
+    <option name="x" value="-6" />
     <option name="width" value="1680" />
     <option name="height" value="938" />
   </component>
@@ -254,7 +234,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -311,15 +290,16 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544104608923" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/Dev Tools/lombok-1.18.0.jar!/" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549849940611" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Atlas/API/out/artifacts/Atlas_jar/Atlas.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15917969" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.annotationProcessors" />
@@ -375,7 +355,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25799572" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -383,16 +363,16 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" sideWeight="0.49946696" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989339" visible="true" weight="0.329718" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.329718" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5010661" side_tool="true" visible="true" weight="0.329718" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.4989339" weight="0.3286334" />
+      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49840087" weight="0.3286334" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -409,6 +389,41 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/QuitListener.kt" />
     <entry file="jar://$USER_HOME$/Desktop/NerdStuff/Server Versions/spigot-1.8.8-R0.1-SNAPSHOT-latest.jar!/org/bukkit/Material.class" />
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/data/DataManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="619">
+          <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-103">
+          <caret line="108" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/ReflectionsUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="245" column="58" selection-start-line="245" selection-start-column="58" selection-end-line="245" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="18" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/commands/PhaseCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="34" column="79" selection-start-line="34" selection-start-column="79" selection-end-line="34" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BlockUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6562">
@@ -418,133 +433,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/MathUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="31" />
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/data/DataManager.java">
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/MiscUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
-          <caret line="50" column="23" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+        <state relative-caret-position="612">
+          <caret line="45" column="33" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1117#1118#0" expanded="true" />
-            <element signature="e#1172#1173#0" expanded="true" />
-            <element signature="e#1231#1232#0" expanded="true" />
-            <element signature="e#1277#1278#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/PastLocation.java">
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/data/PlayerData.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-          <folding>
-            <element signature="e#380#381#0" expanded="true" />
-            <element signature="e#410#411#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/BoundingBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-103">
-          <caret line="108" column="38" selection-start-line="105" selection-start-column="38" selection-end-line="108" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#5383#5384#0" expanded="true" />
-            <element signature="e#5434#5435#0" expanded="true" />
-            <element signature="e#5468#5469#0" expanded="true" />
-            <element signature="e#5519#5520#0" expanded="true" />
-            <element signature="e#8400#8401#0" expanded="true" />
-            <element signature="e#8460#8461#0" expanded="true" />
-            <element signature="e#9800#9801#0" expanded="true" />
-            <element signature="e#9889#9890#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/ReflectionsUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="245" column="58" selection-start-line="245" selection-start-column="58" selection-end-line="245" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13303#13304#0" expanded="true" />
-            <element signature="e#13357#13358#0" expanded="true" />
-            <element signature="e#13787#13788#0" expanded="true" />
-            <element signature="e#13858#13859#0" expanded="true" />
-            <element signature="e#15777#15807#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="14" column="23" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/QuitListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="36" />
+          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#387#388#0" expanded="true" />
+            <element signature="e#475#476#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/data/PlayerData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="25" lean-forward="true" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#764#765#0" expanded="true" />
-            <element signature="e#800#801#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/MiscUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="677">
-          <caret line="60" column="57" selection-start-line="60" selection-start-column="57" selection-end-line="60" selection-end-column="57" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/commands/PhaseCommand.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="34" column="79" selection-start-line="34" selection-start-column="79" selection-end-line="34" selection-end-column="79" />
+        <state relative-caret-position="51">
+          <caret line="3" column="14" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/FunkePhase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="70" column="31" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
+        <state relative-caret-position="468">
+          <caret line="99" column="18" lean-forward="true" selection-start-line="99" selection-start-column="18" selection-end-line="99" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/listener/PhaseListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="48" column="13" lean-forward="true" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+        <state relative-caret-position="162">
+          <caret line="42" column="128" selection-start-line="42" selection-start-column="128" selection-end-line="42" selection-end-column="128" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cc/funkemunky/funkephase/util/PastLocation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -610,7 +560,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>
@@ -629,7 +578,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>lombok-1.18.0</last-edited>
+          <last-edited>Atlas</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -10,8 +10,7 @@ public class QuitListener implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onQuit(PlayerQuitEvent e) {
-        if (FunkePhase.getInstance().hasAlertsOn.contains(e.getPlayer().getUniqueId()))
-            FunkePhase.getInstance().hasAlertsOn.remove(e.getPlayer().getUniqueId());
+        FunkePhase.getInstance().hasAlertsOn.remove(e.getPlayer().getUniqueId());
     }
 
 }

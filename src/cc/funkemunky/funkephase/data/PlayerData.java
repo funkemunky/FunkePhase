@@ -1,6 +1,6 @@
 package cc.funkemunky.funkephase.data;
 
-import cc.funkemunky.funkephase.util.BoundingBox;
+import cc.funkemunky.api.utils.BoundingBox;
 import cc.funkemunky.funkephase.util.PastLocation;
 import lombok.Getter;
 import lombok.Setter;

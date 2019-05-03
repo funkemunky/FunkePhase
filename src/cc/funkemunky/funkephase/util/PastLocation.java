@@ -1,5 +1,7 @@
 package cc.funkemunky.funkephase.util;
 
+import cc.funkemunky.api.Atlas;
+import cc.funkemunky.api.utils.BoundingBox;
 import cc.funkemunky.funkephase.data.PlayerData;
 import lombok.Getter;
 
@@ -16,7 +18,7 @@ public class PastLocation {
     }
 
     public void addLocation(BoundingBox box, PlayerData data) {
-        if(box.getCollidingBlocks(data.player).size() > 0) return;
+        if(box.grow(0.2f,0.2f,0.2f).getCollidingBlockBoxes(data.player).size() > 0) return;
 
         if(boundingBoxes.size() >= max) {
             boundingBoxes.remove(0);

@@ -1,6 +1,7 @@
 name: FunkePhase
 main: cc.funkemunky.funkephase.FunkePhase
-version: 1.6
+version: 2.0
+depend: [Atlas]
 author: funkemunky
 commands:
   funkephase:

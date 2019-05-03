@@ -1,12 +1,12 @@
 package cc.funkemunky.funkephase;
 
+import cc.funkemunky.api.utils.BlockUtils;
+import cc.funkemunky.api.utils.MiscUtils;
+import cc.funkemunky.api.utils.ReflectionsUtil;
 import cc.funkemunky.funkephase.commands.PhaseCommand;
 import cc.funkemunky.funkephase.data.DataManager;
 import cc.funkemunky.funkephase.listener.PhaseListener;
 import cc.funkemunky.funkephase.listener.QuitListener;
-import cc.funkemunky.funkephase.util.BlockUtils;
-import cc.funkemunky.funkephase.util.MiscUtils;
-import cc.funkemunky.funkephase.util.ReflectionsUtil;
 import com.google.common.collect.Sets;
 import lombok.Getter;
 import org.bukkit.Bukkit;
