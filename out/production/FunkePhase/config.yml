@@ -24,3 +24,4 @@ excluded_blocks:
 alert_message: "&8[&4!&8] &c%player% &7was caught phasing/vclipping."
 # The max movement before a the move packet is cancelled (recommended to leave alone).
 max_move: 10
+enderpearl_stuck_protection: true

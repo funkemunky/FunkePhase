@@ -5,6 +5,7 @@ import cc.funkemunky.api.utils.MiscUtils;
 import cc.funkemunky.api.utils.ReflectionsUtil;
 import cc.funkemunky.funkephase.commands.PhaseCommand;
 import cc.funkemunky.funkephase.data.DataManager;
+import cc.funkemunky.funkephase.listener.EnderpearlListener;
 import cc.funkemunky.funkephase.listener.PhaseListener;
 import cc.funkemunky.funkephase.listener.QuitListener;
 import com.google.common.collect.Sets;
@@ -28,7 +29,7 @@ public class FunkePhase extends JavaPlugin {
 
     @Getter
     private static FunkePhase instance;
-    public boolean toggled;
+    public boolean toggled, epStuckProt;
     public List<Material> excludedBlocks;
     public Set<UUID> hasAlertsOn;
     public int maxMove = 10;
@@ -46,6 +47,7 @@ public class FunkePhase extends JavaPlugin {
         serverVersion = Bukkit.getServer().getClass().getPackage().getName().substring(23);
         getServer().getPluginManager().registerEvents(new PhaseListener(), this);
         getServer().getPluginManager().registerEvents(new QuitListener(), this);
+        getServer().getPluginManager().registerEvents(new EnderpearlListener(), this);
         getCommand("funkephase").setExecutor(new PhaseCommand());
         service = Executors.newSingleThreadExecutor();
         Bukkit.getPluginManager().registerEvents(dataManager = new DataManager(), this);
@@ -62,11 +64,14 @@ public class FunkePhase extends JavaPlugin {
         new ReflectionsUtil();
         new BlockUtils();
         new MiscUtils();
+
+        epStuckProt = getConfig().getBoolean("enderpearl_stuck_protection");
     }
 
     public void reloadPhase() {
         reloadConfig();
         excludedBlocks.clear();
+        epStuckProt = getConfig().getBoolean("enderpearl_stuck_protection");
         maxMove = getConfig().getInt("max_move");
         getConfig().getStringList("excluded_blocks").forEach(string -> {
             try {

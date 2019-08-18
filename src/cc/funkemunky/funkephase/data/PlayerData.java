@@ -11,9 +11,9 @@ import org.bukkit.entity.Player;
 public class PlayerData {
 
     public Player player;
-    public long lastDoorSwing;
+    public long lastDoorSwing, lastTeleport;
     private BoundingBox boundingBox;
-    private boolean onGround;
+    private boolean onGround, enderPearlTeleport;
     public PastLocation locations = new PastLocation(10);
 
     public PlayerData(Player player) {
