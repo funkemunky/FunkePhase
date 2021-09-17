@@ -7,6 +7,8 @@ import cc.funkemunky.funkephase.listener.EnderpearlListener;
 import cc.funkemunky.funkephase.listener.PhaseListener;
 import cc.funkemunky.funkephase.listener.ConnectionListener;
 import lombok.Getter;
+import net.md_5.bungee.api.chat.BaseComponent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -45,7 +47,8 @@ public class FunkePhase extends JavaPlugin {
         updateExcludedMaterials();
 
         epStuckProt = getConfig().getBoolean("enderpearl_stuck_protection");
-        alertsString = getConfig().getString("alert_message");
+        alertsString = ChatColor.translateAlternateColorCodes('&',
+                getConfig().getString("alert_message"));
     }
 
     public void reloadPhase() {
@@ -53,7 +56,8 @@ public class FunkePhase extends JavaPlugin {
         excludedBlocks.clear();
         epStuckProt = getConfig().getBoolean("enderpearl_stuck_protection");
         maxMove = getConfig().getInt("max_move");
-        alertsString = getConfig().getString("alert_message");
+        alertsString = ChatColor.translateAlternateColorCodes('&',
+                getConfig().getString("alert_message"));
 
         updateExcludedMaterials();
     }
@@ -67,33 +71,25 @@ public class FunkePhase extends JavaPlugin {
                                         + string + "\" does not exist!"))
                         .parseMaterial()));
     }
+
     public boolean hasPermission(CommandSender sender, String permission) {
         return sender.hasPermission("funkephase." + permission) || sender.hasPermission("funkephase.admin");
     }
 
-    public boolean hasPermission(Player sender, String permission) {
-        return sender.hasPermission("funkephase." + permission) || sender.hasPermission("funkephase.admin");
-    }
-
-    public String formatArrayToString(List<String> array) {
-        StringBuilder toReturn = new StringBuilder();
-        for (int i = 0; i < array.size(); i++) {
-            String string = array.get(i);
-
-            toReturn.append(string).append(array.size() - i > 1 ? ", " : "");
-        }
-        return toReturn.toString();
-    }
-
     public void alert(Player player) {
-        Bukkit.getOnlinePlayers().stream().filter(staff -> playersWithAlerts.contains(staff.getUniqueId()))
-                .forEach(staff -> {
-                    staff.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                            getConfig().getString("alert_message")
-                                    .replaceAll("%player%", player.getName())));
-                });
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&',
-                getConfig().getString("alert_message")
-                .replaceAll("%player%", player.getName())));
+        //Storing field here for sending to console.
+        String stringMsg = alertsString.replace("%player%", player.getName());
+
+        //Converting to BaseComponent for message sending. Ensures formatting is proper
+        BaseComponent[] message = TextComponent.fromLegacyText(stringMsg);
+
+        for (UUID uuid : playersWithAlerts) {
+            Player toSend = Bukkit.getPlayer(uuid); //Lightweight, better than storing Player objects in memory.
+
+            toSend.spigot().sendMessage(message); //Sending player alert message
+        }
+
+        //Printing alert to console
+        Bukkit.getConsoleSender().sendMessage(stringMsg);
     }
 }
