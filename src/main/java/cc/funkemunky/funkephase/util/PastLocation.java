@@ -6,7 +6,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 public class PastLocation {
-    private int max;
+    private final int max;
     public final Deque<SimpleCollisionBox> boundingBoxes = new LinkedList<>();
 
     public PastLocation(int max) {

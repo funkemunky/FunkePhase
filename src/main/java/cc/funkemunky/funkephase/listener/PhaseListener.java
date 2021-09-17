@@ -8,6 +8,7 @@ import cc.funkemunky.api.utils.world.EntityData;
 import cc.funkemunky.api.utils.world.types.SimpleCollisionBox;
 import cc.funkemunky.funkephase.FunkePhase;
 import cc.funkemunky.funkephase.data.PlayerData;
+import cc.funkemunky.funkephase.util.GeneralUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,6 +18,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
@@ -24,35 +26,49 @@ public class PhaseListener implements Listener {
 
     private static final Material AIR = XMaterial.AIR.parseMaterial();
 
-    @EventHandler(priority = EventPriority.LOW)
-    public void onPhase(PlayerMoveEvent e) {
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onTeleport(PlayerTeleportEvent event) {
+        PlayerData data = FunkePhase.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+
+        if(data == null) return; //Making sure PlayerData is not null before we proceed.
+
+        data.setLastTeleport(System.currentTimeMillis());
+    }
+
+    @EventHandler(priority = EventPriority.HIGH)
+    public void onPhase(PlayerMoveEvent event) {
+        PlayerData data = FunkePhase.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
+
+        if(data == null) return; //Making sure PlayerData is not null before we proceed.
+
+        long timestamp = System.currentTimeMillis();
+
+        //This means the player has teleported
+        if(!GeneralUtils.canCheckMovement(data) || timestamp - data.lastTeleport < 5L) return;
+
         FunkePhase.INSTANCE.getService().execute(() -> {
-            Player player = e.getPlayer();
-            PlayerData data = FunkePhase.INSTANCE.getDataManager().getPlayerData(player);
+            Player player = event.getPlayer();
 
-            long timestamp = System.currentTimeMillis();
-
-            if (data == null
-                    || player.getAllowFlight()
-                    || e.getTo().getWorld().getUID() != e.getFrom().getWorld().getUID()
+            if (player.getAllowFlight()
+                    || event.getTo().getWorld().getUID() != event.getFrom().getWorld().getUID()
                     || player.getVehicle() != null
                     || !FunkePhase.INSTANCE.phaseEnabled
                     || timestamp - data.lastDoorSwing < 500) {
                 return;
             }
 
-            if (e.getFrom().distanceSquared(e.getTo())
+            if (event.getFrom().distanceSquared(event.getTo())
                     > (FunkePhase.INSTANCE.getMaxMove() * FunkePhase.INSTANCE.getMaxMove())) {
-                e.setCancelled(true);
+                event.setCancelled(true);
                 return;
             }
 
-            final float minX = (float) Math.min(e.getFrom().getX(), e.getTo().getX()),
-                    minY = (float) Math.min(e.getFrom().getY(), e.getTo().getY()),
-                    minZ = (float) Math.min(e.getFrom().getZ(), e.getTo().getZ()),
-                    maxX = (float) Math.max(e.getFrom().getX(), e.getTo().getX()),
-                    maxY = (float) Math.max(e.getFrom().getY(), e.getTo().getY()),
-                    maxZ = (float) Math.max(e.getFrom().getZ(), e.getTo().getZ());
+            final float minX = (float) Math.min(event.getFrom().getX(), event.getTo().getX()),
+                    minY = (float) Math.min(event.getFrom().getY(), event.getTo().getY()),
+                    minZ = (float) Math.min(event.getFrom().getZ(), event.getTo().getZ()),
+                    maxX = (float) Math.max(event.getFrom().getX(), event.getTo().getX()),
+                    maxY = (float) Math.max(event.getFrom().getY(), event.getTo().getY()),
+                    maxZ = (float) Math.max(event.getFrom().getZ(), event.getTo().getZ());
 
             final SimpleCollisionBox box = new SimpleCollisionBox(minX, minY, minZ, maxX, maxY + 1.8f, maxZ)
                     .shrink(0.1f, 0.1f, 0.1f);
@@ -69,7 +85,7 @@ public class PhaseListener implements Listener {
                     for (int z = z1; z <= z2; ++z) {
                         Block block;
                         Material material;
-                        if ((block = Helper.getBlockAt(e.getTo().getWorld(), x, y, z)) != null
+                        if ((block = Helper.getBlockAt(event.getTo().getWorld(), x, y, z)) != null
                                 && (material = block.getType()) != AIR
                                 && Materials.checkFlag(material, Materials.SOLID)
                                 && !FunkePhase.INSTANCE.getExcludedBlocks().contains(material)) {
@@ -80,11 +96,11 @@ public class PhaseListener implements Listener {
                                 Location setback = findSetback(data);
 
                                 if (setback != null) {
-                                    setback.setPitch(e.getTo().getPitch());
-                                    setback.setYaw(e.getTo().getYaw());
+                                    setback.setPitch(event.getTo().getPitch());
+                                    setback.setYaw(event.getTo().getYaw());
                                 }
-                                e.setTo(setback != null ? setback : e.getFrom());
-                                FunkePhase.INSTANCE.alert(e.getPlayer());
+                                event.setTo(setback != null ? setback : event.getFrom());
+                                FunkePhase.INSTANCE.alert(event.getPlayer());
                                 return;
                             }
                         }
@@ -92,7 +108,7 @@ public class PhaseListener implements Listener {
                 }
             }
 
-            data.locations.addLocation((SimpleCollisionBox) EntityData.getEntityBox(e.getTo(), player));
+            data.locations.addLocation((SimpleCollisionBox) EntityData.getEntityBox(event.getTo(), player));
         });
     }
 

@@ -1,5 +1,6 @@
 package cc.funkemunky.funkephase.data;
 
+import cc.funkemunky.api.reflections.impl.MinecraftReflection;
 import cc.funkemunky.api.utils.BoundingBox;
 import cc.funkemunky.funkephase.util.PastLocation;
 import lombok.Getter;
@@ -14,9 +15,18 @@ public class PlayerData {
     public long lastDoorSwing, lastTeleport;
     private BoundingBox boundingBox;
     private boolean onGround, enderPearlTeleport;
+    private Object playerConnection;
     public PastLocation locations = new PastLocation(10);
 
     public PlayerData(Player player) {
         this.player = player;
+    }
+
+    public Object getPlayerConnection() {
+        if(playerConnection == null) {
+            this.playerConnection = MinecraftReflection.getPlayerConnection(player);
+        }
+
+        return this.playerConnection;
     }
 }

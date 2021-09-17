@@ -1,13 +1,18 @@
 package cc.funkemunky.funkephase.util;
 
+import cc.funkemunky.api.reflections.impl.MinecraftReflection;
+import cc.funkemunky.api.reflections.types.WrappedField;
+import cc.funkemunky.api.tinyprotocol.api.ProtocolVersion;
 import cc.funkemunky.api.utils.BoundingBox;
 import cc.funkemunky.api.utils.MathUtils;
+import cc.funkemunky.funkephase.data.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-public class MiscUtils {
+public class GeneralUtils {
 
     public static BoundingBox getPlayerBoxByLocation(Vector vector) {
         Vector min = vector.subtract(new Vector(0.3, 0, 0.3)), max = vector.add(new Vector(0.3, 1.8, 0.3));
@@ -18,7 +23,18 @@ public class MiscUtils {
         return color + ChatColor.STRIKETHROUGH.toString() + "-----------------------------------------------------";
     }
 
-    public static  boolean isInSolidBlock(BoundingBox box, World world) {
+    private static final WrappedField checkMovement = ProtocolVersion.getGameVersion().isBelow(ProtocolVersion.V1_9)
+            ? MinecraftReflection.playerConnection.getFieldByName("checkMovement")
+            : MinecraftReflection.playerConnection.getFieldByName("teleportPos");
+    public static boolean canCheckMovement(PlayerData data) {
+        final Object playerConnection = data.getPlayerConnection();
+
+        if(ProtocolVersion.getGameVersion().isBelow(ProtocolVersion.V1_9)) {
+            return checkMovement.get(playerConnection);
+        } else return (checkMovement.get(playerConnection) == null);
+    }
+
+    public static boolean isInSolidBlock(BoundingBox box, World world) {
         int minX = MathUtils.floor(box.minX);
         int maxX = MathUtils.floor(box.maxX + 1);
         int minY = MathUtils.floor(box.minY);
