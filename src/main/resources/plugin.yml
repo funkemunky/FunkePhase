@@ -2,6 +2,7 @@ name: FunkePhase
 main: cc.funkemunky.funkephase.FunkePhase
 version: ${project.version}
 depend: [Atlas]
+api-version: 1.13
 author: funkemunky
 commands:
   funkephase:
