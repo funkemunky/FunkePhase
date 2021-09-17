@@ -9,7 +9,6 @@ import cc.funkemunky.funkephase.data.PlayerData;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class GeneralUtils {

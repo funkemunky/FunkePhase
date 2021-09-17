@@ -93,11 +93,6 @@ public class FunkePhase extends JavaPlugin {
             Bukkit.getScheduler().cancelTasks(this);
         }
 
-        log.info("Unregistering Atlas services...");
-        {
-            Atlas.getInstance().getBukkitCommandManager(this).unregisterCommands();
-        }
-
         log.info("Clearing more data...");
         {
             excludedBlocks.clear();
