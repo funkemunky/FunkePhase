@@ -1,5 +1,6 @@
 package cc.funkemunky.funkephase;
 
+import cc.funkemunky.api.Atlas;
 import cc.funkemunky.api.utils.XMaterial;
 import cc.funkemunky.funkephase.commands.PhaseCommand;
 import cc.funkemunky.funkephase.data.DataManager;
@@ -41,7 +42,7 @@ public class FunkePhase extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PhaseListener(), this);
         getServer().getPluginManager().registerEvents(new ConnectionListener(), this);
         getServer().getPluginManager().registerEvents(new EnderpearlListener(), this);
-        getCommand("funkephase").setExecutor(new PhaseCommand());
+        Atlas.getInstance().getBukkitCommandManager(this).registerCommand(new PhaseCommand());
         service = Executors.newSingleThreadExecutor();
 
         updateExcludedMaterials();
