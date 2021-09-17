@@ -27,32 +27,22 @@ public class DataManager implements Listener {
         dataObjects.put(player.getUniqueId(), new PlayerData(player));
     }
 
-    public void removeDataObject(PlayerData dataObject) {
-        dataObjects.remove(dataObject);
+    public void removeDataObject(UUID uuid) {
+        dataObjects.remove(uuid);
     }
 
     public PlayerData getPlayerData(Player player) {
-        if(!dataObjects.containsKey(player.getUniqueId())) {
-           createDataObject(player);
-           return null;
-        }
-        return dataObjects.get(player.getUniqueId());
+        return dataObjects.computeIfAbsent(player.getUniqueId(), key -> new PlayerData(player));
     }
 
     @EventHandler
     public void onEvent(PlayerJoinEvent event) {
         createDataObject(event.getPlayer());
-
-        //event.getPlayer().sendMessage("test");
     }
 
     @EventHandler
     public void onEvent(PlayerQuitEvent event) {
-        PlayerData data = getPlayerData(event.getPlayer());
-
-        if (data != null) {
-            removeDataObject(data);
-        }
+        removeDataObject(event.getPlayer().getUniqueId());
     }
 
 }

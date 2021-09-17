@@ -1,15 +1,12 @@
 package cc.funkemunky.funkephase.listener;
 
+import cc.funkemunky.api.utils.Materials;
 import cc.funkemunky.funkephase.FunkePhase;
 import cc.funkemunky.funkephase.data.PlayerData;
-import cc.funkemunky.funkephase.util.BlockUtils;
 import cc.funkemunky.funkephase.util.FionaLocation;
 import cc.funkemunky.funkephase.util.MiscUtils;
-import cc.funkemunky.funkephase.util.ReflectionsUtil;
 import com.google.common.collect.Lists;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -28,7 +25,8 @@ public class EnderpearlListener implements Listener {
 
             event.getTo().setY(event.getTo().getY() + 0.5f);
 
-            if(FunkePhase.getInstance().epStuckProt && MiscUtils.getPlayerBoxByLocation(event.getTo().toVector()).isInSolidBlock(event.getTo().getWorld())) {
+            if(FunkePhase.getInstance().epStuckProt && MiscUtils.isInSolidBlock(MiscUtils
+                    .getPlayerBoxByLocation(event.getTo().toVector()), event.getTo().getWorld())) {
                 double xMin = Math.min(event.getFrom().getX(), event.getTo().getX());
                 double yMin = Math.min(event.getFrom().getY(), event.getTo().getY());
                 double zMin = Math.min(event.getFrom().getZ(), event.getTo().getZ());
@@ -40,7 +38,9 @@ public class EnderpearlListener implements Listener {
                 for (double x = xMin; x < xMax; x++) {
                     for (double y = yMin; y < yMax; y ++) {
                         for (double z = zMin; z < zMax; z ++) {
-                            FionaLocation vector = new FionaLocation(x, y, z, event.getPlayer().getEyeLocation().getYaw(), event.getPlayer().getEyeLocation().getPitch());
+                            FionaLocation vector = new FionaLocation(x, y, z,
+                                    event.getPlayer().getEyeLocation().getYaw(),
+                                    event.getPlayer().getEyeLocation().getPitch());
 
                             vectors.add(vector);
                         }
@@ -51,7 +51,9 @@ public class EnderpearlListener implements Listener {
 
                 for (FionaLocation vector : vectors) {
                     Location location = vector.toLocation(event.getPlayer().getWorld());
-                    if (!BlockUtils.isSolid(location.getBlock()) && !BlockUtils.isSolid(location.clone().add(0, 1,0).getBlock())) {
+                    if (!Materials.checkFlag(location.getBlock().getType(), Materials.SOLID)
+                            && !Materials.checkFlag(location
+                            .add(0, 1,0).getBlock().getType(), Materials.SOLID)) {
                         event.setTo(vector.toLocation(event.getPlayer().getWorld()));
                         break;
                     }

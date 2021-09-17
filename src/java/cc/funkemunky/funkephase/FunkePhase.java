@@ -17,10 +17,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -30,7 +27,7 @@ public class FunkePhase extends JavaPlugin {
     @Getter
     private static FunkePhase instance;
     public boolean toggled, epStuckProt;
-    public List<Material> excludedBlocks;
+    public EnumSet<Material> excludedBlocks;
     public Set<UUID> hasAlertsOn;
     public int maxMove = 10;
     public ExecutorService service;
@@ -41,7 +38,7 @@ public class FunkePhase extends JavaPlugin {
     public void onEnable() {
         instance = this;
         toggled = true;
-        excludedBlocks = new ArrayList<>();
+        excludedBlocks = EnumSet.noneOf(Material.class);
         hasAlertsOn = Sets.newHashSet();
         saveDefaultConfig();
         serverVersion = Bukkit.getServer().getClass().getPackage().getName().substring(23);
