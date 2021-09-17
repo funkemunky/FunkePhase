@@ -1,7 +1,6 @@
 package cc.funkemunky.funkephase.listener;
 
 import cc.funkemunky.api.Atlas;
-import cc.funkemunky.api.commands.FunkeCommand;
 import cc.funkemunky.api.tinyprotocol.api.ProtocolVersion;
 import cc.funkemunky.api.utils.*;
 import cc.funkemunky.api.utils.world.BlockData;
@@ -21,9 +20,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PhaseListener implements Listener {
 

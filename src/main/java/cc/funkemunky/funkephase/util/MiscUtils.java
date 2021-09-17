@@ -2,18 +2,10 @@ package cc.funkemunky.funkephase.util;
 
 import cc.funkemunky.api.utils.BoundingBox;
 import cc.funkemunky.api.utils.MathUtils;
-import cc.funkemunky.funkephase.FunkePhase;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class MiscUtils {
 

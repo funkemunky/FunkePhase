@@ -3,6 +3,7 @@ package cc.funkemunky.funkephase;
 import cc.funkemunky.api.utils.BlockUtils;
 import cc.funkemunky.api.utils.MiscUtils;
 import cc.funkemunky.api.utils.ReflectionsUtil;
+import cc.funkemunky.api.utils.XMaterial;
 import cc.funkemunky.funkephase.commands.PhaseCommand;
 import cc.funkemunky.funkephase.data.DataManager;
 import cc.funkemunky.funkephase.listener.EnderpearlListener;
@@ -51,16 +52,13 @@ public class FunkePhase extends JavaPlugin {
 
         getConfig().getStringList("excluded_blocks").forEach(string -> {
             try {
-                Material material = Material.getMaterial(string);
-
-                excludedBlocks.add(material);
+                excludedBlocks.add(XMaterial.matchXMaterial(string).orElseThrow(() ->
+                        new RuntimeException("Material within XMaterial class \"" + string + "\" does not exist!"))
+                        .parseMaterial());
             } catch (NullPointerException e) {
                 throw new NullPointerException("The material '" + string + "' in the config does not exist!");
             }
         });
-        new ReflectionsUtil();
-        new BlockUtils();
-        new MiscUtils();
 
         epStuckProt = getConfig().getBoolean("enderpearl_stuck_protection");
     }
