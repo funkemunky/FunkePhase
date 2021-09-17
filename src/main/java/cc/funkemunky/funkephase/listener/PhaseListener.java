@@ -1,6 +1,5 @@
 package cc.funkemunky.funkephase.listener;
 
-import cc.funkemunky.api.Atlas;
 import cc.funkemunky.api.tinyprotocol.api.ProtocolVersion;
 import cc.funkemunky.api.utils.*;
 import cc.funkemunky.api.utils.world.BlockData;
@@ -25,7 +24,7 @@ public class PhaseListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerTeleport(PlayerTeleportEvent event) {
-        PlayerData data = FunkePhase.getInstance().getDataManager().getPlayerData(event.getPlayer());
+        PlayerData data = FunkePhase.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
         if(data != null) {
             data.setLastTeleport(System.currentTimeMillis());
@@ -35,14 +34,14 @@ public class PhaseListener implements Listener {
     private static final Material AIR = XMaterial.AIR.parseMaterial();
     @EventHandler(priority = EventPriority.LOW)
     public void onPhase(PlayerMoveEvent e) {
-        Atlas.getInstance().getSchedular().execute(() -> {
+        FunkePhase.INSTANCE.getService().execute(() -> {
             Player player = e.getPlayer();
-            PlayerData data = FunkePhase.getInstance().getDataManager().getPlayerData(player);
+            PlayerData data = FunkePhase.INSTANCE.getDataManager().getPlayerData(player);
 
             if (data == null
                     || player.getAllowFlight()
                     || player.getVehicle() != null
-                    || !FunkePhase.getInstance().toggled
+                    || !FunkePhase.INSTANCE.isPhaseEnabled()
                     || MathUtils.elapsed(data.lastDoorSwing) < 500) {
                 return;
             }
@@ -52,7 +51,7 @@ public class PhaseListener implements Listener {
         if (player.getAllowFlight()
                 || e.getTo().getWorld().getUID() != e.getFrom().getWorld().getUID()
                 || player.getVehicle() != null
-                || !FunkePhase.getInstance().toggled
+                || !FunkePhase.INSTANCE.phaseEnabled
                 || timestamp - data.lastTeleport < 70L
                 || timestamp - data.lastDoorSwing < 500) {
             return;
@@ -88,7 +87,7 @@ public class PhaseListener implements Listener {
                         if ((block = Helper.getBlockAt(e.getTo().getWorld(), x, y, z)) != null
                                 && (material = block.getType()) != AIR
                                 && Materials.checkFlag(material, Materials.SOLID)
-                                && !FunkePhase.getInstance().getExcludedBlocks().contains(material)) {
+                                && !FunkePhase.INSTANCE.getExcludedBlocks().contains(material)) {
                             CollisionBox blockBox = BlockData.getData(material)
                                     .getBox(block, ProtocolVersion.getGameVersion());
 
@@ -100,7 +99,7 @@ public class PhaseListener implements Listener {
                                     setback.setYaw(e.getTo().getYaw());
                                 }
                                 e.setTo(setback != null ? setback : e.getFrom());
-                                FunkePhase.getInstance().alert(e.getPlayer());
+                                FunkePhase.INSTANCE.alert(e.getPlayer());
                                 return;
                             }
                         }
@@ -119,7 +118,7 @@ public class PhaseListener implements Listener {
                     || BlockUtils.isFenceGate(event.getClickedBlock())
                     || BlockUtils.isTrapDoor(event.getClickedBlock()))
                     && !event.isCancelled()) {
-                PlayerData data = FunkePhase.getInstance().getDataManager().getPlayerData(event.getPlayer());
+                PlayerData data = FunkePhase.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
                 if(data != null) {
                     data.lastDoorSwing = System.currentTimeMillis();

@@ -1,15 +1,11 @@
 package cc.funkemunky.funkephase;
 
-import cc.funkemunky.api.utils.BlockUtils;
-import cc.funkemunky.api.utils.MiscUtils;
-import cc.funkemunky.api.utils.ReflectionsUtil;
 import cc.funkemunky.api.utils.XMaterial;
 import cc.funkemunky.funkephase.commands.PhaseCommand;
 import cc.funkemunky.funkephase.data.DataManager;
 import cc.funkemunky.funkephase.listener.EnderpearlListener;
 import cc.funkemunky.funkephase.listener.PhaseListener;
-import cc.funkemunky.funkephase.listener.QuitListener;
-import com.google.common.collect.Sets;
+import cc.funkemunky.funkephase.listener.ConnectionListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -25,30 +21,27 @@ import java.util.concurrent.Executors;
 @Getter
 public class FunkePhase extends JavaPlugin {
 
-    @Getter
-    private static FunkePhase instance;
-    public boolean toggled, epStuckProt;
-    public EnumSet<Material> excludedBlocks;
-    public Set<UUID> hasAlertsOn;
-    public int maxMove = 10;
-    public ExecutorService service;
+    public static FunkePhase INSTANCE;
+    public boolean phaseEnabled, epStuckProt;
+    private final EnumSet<Material> excludedBlocks = EnumSet.noneOf(Material.class);
+    private final Set<UUID> playersWithAlerts = new HashSet<>();
+    private int maxMove = 10;
+    private ExecutorService service;
     private DataManager dataManager;
     private String serverVersion;
 
     @Override
     public void onEnable() {
-        instance = this;
-        toggled = true;
-        excludedBlocks = EnumSet.noneOf(Material.class);
-        hasAlertsOn = Sets.newHashSet();
+        INSTANCE = this;
+        phaseEnabled = true;
         saveDefaultConfig();
         serverVersion = Bukkit.getServer().getClass().getPackage().getName().substring(23);
+        dataManager = new DataManager();
         getServer().getPluginManager().registerEvents(new PhaseListener(), this);
-        getServer().getPluginManager().registerEvents(new QuitListener(), this);
+        getServer().getPluginManager().registerEvents(new ConnectionListener(), this);
         getServer().getPluginManager().registerEvents(new EnderpearlListener(), this);
         getCommand("funkephase").setExecutor(new PhaseCommand());
         service = Executors.newSingleThreadExecutor();
-        Bukkit.getPluginManager().registerEvents(dataManager = new DataManager(), this);
 
         getConfig().getStringList("excluded_blocks").forEach(string -> {
             try {
@@ -98,11 +91,14 @@ public class FunkePhase extends JavaPlugin {
     }
 
     public void alert(Player player) {
-        Bukkit.getOnlinePlayers().stream().filter(staff -> hasAlertsOn.contains(staff.getUniqueId())).forEach(staff -> {
-            staff.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("alert_message")
-                    .replaceAll("%player%", player.getName())));
-        });
-        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("alert_message")
+        Bukkit.getOnlinePlayers().stream().filter(staff -> playersWithAlerts.contains(staff.getUniqueId()))
+                .forEach(staff -> {
+                    staff.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                            getConfig().getString("alert_message")
+                                    .replaceAll("%player%", player.getName())));
+                });
+        Bukkit.getConsoleSender().sendMessage(ChatColor.translateAlternateColorCodes('&',
+                getConfig().getString("alert_message")
                 .replaceAll("%player%", player.getName())));
     }
 }

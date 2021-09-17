@@ -19,13 +19,13 @@ public class EnderpearlListener implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEvent(PlayerTeleportEvent event) {
         if(event.getCause().equals(PlayerTeleportEvent.TeleportCause.ENDER_PEARL)) {
-            PlayerData data = FunkePhase.getInstance().getDataManager().getPlayerData(event.getPlayer());
+            PlayerData data = FunkePhase.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
             if(data != null) data.setEnderPearlTeleport(true);
 
             event.getTo().setY(event.getTo().getY() + 0.5f);
 
-            if(FunkePhase.getInstance().epStuckProt && MiscUtils.isInSolidBlock(MiscUtils
+            if(FunkePhase.INSTANCE.epStuckProt && MiscUtils.isInSolidBlock(MiscUtils
                     .getPlayerBoxByLocation(event.getTo().toVector()), event.getTo().getWorld())) {
                 double xMin = Math.min(event.getFrom().getX(), event.getTo().getX());
                 double yMin = Math.min(event.getFrom().getY(), event.getTo().getY());
