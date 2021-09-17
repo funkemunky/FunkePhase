@@ -57,7 +57,8 @@ public class PhaseListener implements Listener {
             return;
         }
 
-            if (e.getFrom().distance(e.getTo()) > 10) {
+            if (e.getFrom().distanceSquared(e.getTo())
+                    > (FunkePhase.INSTANCE.getMaxMove() * FunkePhase.INSTANCE.getMaxMove())) {
                 e.setCancelled(true);
                 return;
             }

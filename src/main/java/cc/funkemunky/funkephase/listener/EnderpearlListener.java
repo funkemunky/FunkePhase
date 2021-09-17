@@ -47,7 +47,7 @@ public class EnderpearlListener implements Listener {
                     }
                 }
 
-                vectors.sort(Comparator.comparing(vector -> vector.toVector().distance(event.getTo().toVector())));
+                vectors.sort(Comparator.comparing(vector -> vector.toVector().distanceSquared(event.getTo().toVector())));
 
                 for (FionaLocation vector : vectors) {
                     Location location = vector.toLocation(event.getPlayer().getWorld());
