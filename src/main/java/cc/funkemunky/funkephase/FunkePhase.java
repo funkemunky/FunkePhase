@@ -15,11 +15,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Logger;
 
 @Getter
 public class FunkePhase extends JavaPlugin {
@@ -32,24 +34,79 @@ public class FunkePhase extends JavaPlugin {
     private ExecutorService service;
     private DataManager dataManager;
     private String alertsString;
+    private Logger log;
 
     @Override
     public void onEnable() {
+        log = Bukkit.getLogger();
+        log.info("Starting initialization...");
         INSTANCE = this;
         phaseEnabled = true;
-        saveDefaultConfig();
-        dataManager = new DataManager();
-        getServer().getPluginManager().registerEvents(new PhaseListener(), this);
-        getServer().getPluginManager().registerEvents(new ConnectionListener(), this);
-        getServer().getPluginManager().registerEvents(new EnderpearlListener(), this);
-        Atlas.getInstance().getBukkitCommandManager(this).registerCommand(new PhaseCommand());
-        service = Executors.newSingleThreadExecutor();
 
-        updateExcludedMaterials();
+        log.info("Loading configuration data...");
+        {
+            saveDefaultConfig();
+            updateExcludedMaterials();
 
-        epStuckProt = getConfig().getBoolean("enderpearl_stuck_protection");
-        alertsString = ChatColor.translateAlternateColorCodes('&',
-                getConfig().getString("alert_message"));
+            epStuckProt = getConfig().getBoolean("enderpearl_stuck_protection");
+            alertsString = ChatColor.translateAlternateColorCodes('&',
+                    getConfig().getString("alert_message"));
+        }
+
+        log.info("Loading services...");
+        {
+            dataManager = new DataManager();
+            service = Executors.newSingleThreadExecutor();
+        }
+
+        log.info("Registering listeners...");
+        {
+            getServer().getPluginManager().registerEvents(new PhaseListener(), this);
+            getServer().getPluginManager().registerEvents(new ConnectionListener(), this);
+            getServer().getPluginManager().registerEvents(new EnderpearlListener(), this);
+        }
+
+
+        log.info("Register command(s)...");
+        {
+            Atlas.getInstance().getBukkitCommandManager(this).registerCommand(new PhaseCommand());
+        }
+
+        log.info(String.format("Completed initialization of FunkePhase v%s", getDescription().getVersion()));
+    }
+
+    @Override
+    public void onDisable() {
+        log.info("Running shutdown sequence...");
+
+        log.info("Disabling FunkePhase services...");
+        {
+            phaseEnabled = false;
+            dataManager.shutdown();
+            dataManager = null;
+            service.shutdown();
+        }
+
+        log.info("Unregistering Bukkit services...");
+        {
+            HandlerList.unregisterAll(this);
+            Bukkit.getScheduler().cancelTasks(this);
+        }
+
+        log.info("Unregistering Atlas services...");
+        {
+            Atlas.getInstance().getBukkitCommandManager(this).unregisterCommands();
+        }
+
+        log.info("Clearing more data...");
+        {
+            excludedBlocks.clear();
+            playersWithAlerts.clear();
+            INSTANCE = null;
+        }
+
+        log.info("Completed shutdown sequence! Removing logger instance...");
+        log = null;
     }
 
     public void reloadPhase() {

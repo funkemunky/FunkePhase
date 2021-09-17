@@ -33,6 +33,12 @@ public class DataManager {
         }
     }
 
+    public void shutdown() {
+        synchronized (dataObjects) {
+            dataObjects.clear();
+        }
+    }
+
     public synchronized PlayerData getPlayerData(Player player) {
         return dataObjects.computeIfAbsent(player.getUniqueId(), key -> new PlayerData(player));
     }

@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 @CommandPermission("funkephase.command|funkephase.admin")
 public class PhaseCommand extends BaseCommand {
 
-    @Syntax("")
+    @CommandAlias("funkephase|phase")
+    @Description("FunkePhase main command")
     public void onCommand(CommandSender sender)  {
         sender.sendMessage(ChatColor.RED + " Usage: /funkephase [toggle/reload/alerts]");
     }

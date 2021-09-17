@@ -22,40 +22,24 @@ import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class PhaseListener implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGHEST)
-    public void onPlayerTeleport(PlayerTeleportEvent event) {
-        PlayerData data = FunkePhase.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
-
-        if(data != null) {
-            data.setLastTeleport(System.currentTimeMillis());
-        }
-    }
-
     private static final Material AIR = XMaterial.AIR.parseMaterial();
+
     @EventHandler(priority = EventPriority.LOW)
     public void onPhase(PlayerMoveEvent e) {
         FunkePhase.INSTANCE.getService().execute(() -> {
             Player player = e.getPlayer();
             PlayerData data = FunkePhase.INSTANCE.getDataManager().getPlayerData(player);
 
+            long timestamp = System.currentTimeMillis();
+
             if (data == null
                     || player.getAllowFlight()
+                    || e.getTo().getWorld().getUID() != e.getFrom().getWorld().getUID()
                     || player.getVehicle() != null
-                    || !FunkePhase.INSTANCE.isPhaseEnabled()
-                    || MathUtils.elapsed(data.lastDoorSwing) < 500) {
+                    || !FunkePhase.INSTANCE.phaseEnabled
+                    || timestamp - data.lastDoorSwing < 500) {
                 return;
             }
-
-        long timestamp = System.currentTimeMillis();
-
-        if (player.getAllowFlight()
-                || e.getTo().getWorld().getUID() != e.getFrom().getWorld().getUID()
-                || player.getVehicle() != null
-                || !FunkePhase.INSTANCE.phaseEnabled
-                || timestamp - data.lastTeleport < 70L
-                || timestamp - data.lastDoorSwing < 500) {
-            return;
-        }
 
             if (e.getFrom().distanceSquared(e.getTo())
                     > (FunkePhase.INSTANCE.getMaxMove() * FunkePhase.INSTANCE.getMaxMove())) {
@@ -71,18 +55,18 @@ public class PhaseListener implements Listener {
                     maxZ = (float) Math.max(e.getFrom().getZ(), e.getTo().getZ());
 
             final SimpleCollisionBox box = new SimpleCollisionBox(minX, minY, minZ, maxX, maxY + 1.8f, maxZ)
-                    .shrink(0.1f,0.1f,0.1f);
+                    .shrink(0.1f, 0.1f, 0.1f);
 
-            int x1 = (int)Math.floor(box.xMin);
-            int y1 = (int)Math.floor(box.yMin);
-            int z1 = (int)Math.floor(box.zMin);
-            int x2 = (int)Math.ceil(box.xMax);
-            int y2 = (int)Math.ceil(box.yMax);
-            int z2 = (int)Math.ceil(box.zMax);
+            int x1 = (int) Math.floor(box.xMin);
+            int y1 = (int) Math.floor(box.yMin);
+            int z1 = (int) Math.floor(box.zMin);
+            int x2 = (int) Math.ceil(box.xMax);
+            int y2 = (int) Math.ceil(box.yMax);
+            int z2 = (int) Math.ceil(box.zMax);
 
-            for(int x = x1; x <= x2; ++x) {
-                for(int y = y1; y <= y2; ++y) {
-                    for(int z = z1; z <= z2; ++z) {
+            for (int x = x1; x <= x2; ++x) {
+                for (int y = y1; y <= y2; ++y) {
+                    for (int z = z1; z <= z2; ++z) {
                         Block block;
                         Material material;
                         if ((block = Helper.getBlockAt(e.getTo().getWorld(), x, y, z)) != null
@@ -92,10 +76,10 @@ public class PhaseListener implements Listener {
                             CollisionBox blockBox = BlockData.getData(material)
                                     .getBox(block, ProtocolVersion.getGameVersion());
 
-                            if(blockBox.isIntersected(box)) {
+                            if (blockBox.isIntersected(box)) {
                                 Location setback = findSetback(data);
 
-                                if(setback != null) {
+                                if (setback != null) {
                                     setback.setPitch(e.getTo().getPitch());
                                     setback.setYaw(e.getTo().getYaw());
                                 }
@@ -108,7 +92,7 @@ public class PhaseListener implements Listener {
                 }
             }
 
-            data.locations.addLocation((SimpleCollisionBox)EntityData.getEntityBox(e.getTo(), player));
+            data.locations.addLocation((SimpleCollisionBox) EntityData.getEntityBox(e.getTo(), player));
         });
     }
 
@@ -121,7 +105,7 @@ public class PhaseListener implements Listener {
                     && !event.isCancelled()) {
                 PlayerData data = FunkePhase.INSTANCE.getDataManager().getPlayerData(event.getPlayer());
 
-                if(data != null) {
+                if (data != null) {
                     data.lastDoorSwing = System.currentTimeMillis();
                 }
             }
