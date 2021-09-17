@@ -1,5 +1,6 @@
 package cc.funkemunky.funkephase.util;
 
+import cc.funkemunky.api.utils.MathUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;

@@ -1,0 +1,9 @@
+name: FunkePhase
+main: cc.funkemunky.funkephase.FunkePhase
+version: ${project.version}
+depend: [Atlas]
+author: funkemunky
+commands:
+  funkephase:
+    description: The funke phase main command.
+    aliases: [phase, fphase]
