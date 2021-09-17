@@ -28,14 +28,13 @@ public class FunkePhase extends JavaPlugin {
     private int maxMove = 10;
     private ExecutorService service;
     private DataManager dataManager;
-    private String serverVersion;
+    private String alertsString;
 
     @Override
     public void onEnable() {
         INSTANCE = this;
         phaseEnabled = true;
         saveDefaultConfig();
-        serverVersion = Bukkit.getServer().getClass().getPackage().getName().substring(23);
         dataManager = new DataManager();
         getServer().getPluginManager().registerEvents(new PhaseListener(), this);
         getServer().getPluginManager().registerEvents(new ConnectionListener(), this);
@@ -43,17 +42,10 @@ public class FunkePhase extends JavaPlugin {
         getCommand("funkephase").setExecutor(new PhaseCommand());
         service = Executors.newSingleThreadExecutor();
 
-        getConfig().getStringList("excluded_blocks").forEach(string -> {
-            try {
-                excludedBlocks.add(XMaterial.matchXMaterial(string).orElseThrow(() ->
-                        new RuntimeException("Material within XMaterial class \"" + string + "\" does not exist!"))
-                        .parseMaterial());
-            } catch (NullPointerException e) {
-                throw new NullPointerException("The material '" + string + "' in the config does not exist!");
-            }
-        });
+        updateExcludedMaterials();
 
         epStuckProt = getConfig().getBoolean("enderpearl_stuck_protection");
+        alertsString = getConfig().getString("alert_message");
     }
 
     public void reloadPhase() {
@@ -61,17 +53,20 @@ public class FunkePhase extends JavaPlugin {
         excludedBlocks.clear();
         epStuckProt = getConfig().getBoolean("enderpearl_stuck_protection");
         maxMove = getConfig().getInt("max_move");
-        getConfig().getStringList("excluded_blocks").forEach(string -> {
-            try {
-                Material material = Material.getMaterial(string);
+        alertsString = getConfig().getString("alert_message");
 
-                excludedBlocks.add(material);
-            } catch (NullPointerException e) {
-                throw new NullPointerException("The material '" + string + "' in the config does not exist!");
-            }
-        });
+        updateExcludedMaterials();
     }
 
+    private void updateExcludedMaterials() {
+        excludedBlocks.clear(); //Making sure the Material set is empty so its updated properly
+        getConfig().getStringList("excluded_blocks").forEach(string ->
+                excludedBlocks.add(XMaterial.matchXMaterial(string)
+                        .orElseThrow(() ->
+                                new NullPointerException("Material within XMaterial class \""
+                                        + string + "\" does not exist!"))
+                        .parseMaterial()));
+    }
     public boolean hasPermission(CommandSender sender, String permission) {
         return sender.hasPermission("funkephase." + permission) || sender.hasPermission("funkephase.admin");
     }
