@@ -30,6 +30,10 @@ public class PhaseListener implements Listener {
         if(data == null) return; //Making sure PlayerData is not null before we proceed.
 
         data.setLastTeleport(event.getTo().clone());
+
+        //Fixing potential exploit/bug where players will phase and get teleported back
+        data.locations.locations.clear();
+        data.locations.addLocation(event.getTo().clone());
     }
 
     @EventHandler(priority = EventPriority.HIGH)
