@@ -5,6 +5,7 @@ import cc.funkemunky.api.utils.BoundingBox;
 import cc.funkemunky.funkephase.util.PastLocation;
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 @Getter
@@ -12,11 +13,12 @@ import org.bukkit.entity.Player;
 public class PlayerData {
 
     public Player player;
-    public long lastDoorSwing, lastTeleport;
+    public long lastDoorSwing;
+    public Location lastTeleport;
     private BoundingBox boundingBox;
     private boolean onGround, enderPearlTeleport;
     private Object playerConnection;
-    public PastLocation locations = new PastLocation(10);
+    public PastLocation locations = new PastLocation(3);
 
     public PlayerData(Player player) {
         this.player = player;

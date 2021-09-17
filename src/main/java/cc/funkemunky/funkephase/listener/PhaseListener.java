@@ -4,11 +4,9 @@ import cc.funkemunky.api.tinyprotocol.api.ProtocolVersion;
 import cc.funkemunky.api.utils.*;
 import cc.funkemunky.api.utils.world.BlockData;
 import cc.funkemunky.api.utils.world.CollisionBox;
-import cc.funkemunky.api.utils.world.EntityData;
 import cc.funkemunky.api.utils.world.types.SimpleCollisionBox;
 import cc.funkemunky.funkephase.FunkePhase;
 import cc.funkemunky.funkephase.data.PlayerData;
-import cc.funkemunky.funkephase.util.GeneralUtils;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -18,7 +16,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
@@ -32,7 +29,7 @@ public class PhaseListener implements Listener {
 
         if(data == null) return; //Making sure PlayerData is not null before we proceed.
 
-        data.setLastTeleport(System.currentTimeMillis());
+        data.setLastTeleport(event.getTo().clone());
     }
 
     @EventHandler(priority = EventPriority.HIGH)
@@ -44,7 +41,10 @@ public class PhaseListener implements Listener {
         long timestamp = System.currentTimeMillis();
 
         //This means the player has teleported
-        if(!GeneralUtils.canCheckMovement(data) || timestamp - data.lastTeleport < 5L) return;
+        if(data.getLastTeleport() != null && event.getTo().equals(data.getLastTeleport())) {
+            data.setLastTeleport(null);
+            return;
+        }
 
         FunkePhase.INSTANCE.getService().execute(() -> {
             Player player = event.getPlayer();
@@ -71,7 +71,7 @@ public class PhaseListener implements Listener {
                     maxZ = (float) Math.max(event.getFrom().getZ(), event.getTo().getZ());
 
             final SimpleCollisionBox box = new SimpleCollisionBox(minX, minY, minZ, maxX, maxY + 1.8f, maxZ)
-                    .shrink(0.1f, 0.1f, 0.1f);
+                    .shrink(0.05f, 0.05f, 0.05f);
 
             int x1 = (int) Math.floor(box.xMin);
             int y1 = (int) Math.floor(box.yMin);
@@ -99,7 +99,7 @@ public class PhaseListener implements Listener {
                                     setback.setPitch(event.getTo().getPitch());
                                     setback.setYaw(event.getTo().getYaw());
                                 }
-                                event.setTo(setback != null ? setback : event.getFrom());
+                                event.getPlayer().teleport(setback != null ? setback : event.getFrom());
                                 FunkePhase.INSTANCE.alert(event.getPlayer());
                                 return;
                             }
@@ -108,7 +108,7 @@ public class PhaseListener implements Listener {
                 }
             }
 
-            data.locations.addLocation((SimpleCollisionBox) EntityData.getEntityBox(event.getTo(), player));
+            data.locations.addLocation(event.getFrom().clone());
         });
     }
 
@@ -129,15 +129,8 @@ public class PhaseListener implements Listener {
     }
 
     public Location findSetback(PlayerData data) {
-        synchronized (data.locations.boundingBoxes) {
-            for (SimpleCollisionBox box : data.locations.boundingBoxes) {
-                if (Helper.getBlocksNearby2(data.getPlayer().getWorld(), box, Materials.SOLID).stream()
-                        .noneMatch(block -> BlockData.getData(block.getType())
-                                .getBox(block, ProtocolVersion.getGameVersion()).isCollided(box))) {
-                    return box.min().toLocation(data.player.getWorld());
-                }
-            }
-            return null;
+        synchronized (data.locations.locations) {
+            return data.locations.locations.getFirst();
         }
     }
 }
