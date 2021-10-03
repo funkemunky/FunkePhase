@@ -15,6 +15,7 @@ public class PlayerData {
     public Player player;
     public long lastDoorSwing;
     public Location lastTeleport;
+    public long lastTeleportTime;
     private BoundingBox boundingBox;
     private boolean onGround, enderPearlTeleport;
     private Object playerConnection;

@@ -7,7 +7,7 @@
 
     <groupId>dev.brighten.plugin</groupId>
     <artifactId>FunkePhase</artifactId>
-    <version>2.0</version>
+    <version>2.1</version>
 
     <repositories>
         <repository>

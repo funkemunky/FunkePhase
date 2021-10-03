@@ -30,6 +30,7 @@ public class PhaseListener implements Listener {
         if(data == null) return; //Making sure PlayerData is not null before we proceed.
 
         data.setLastTeleport(event.getTo().clone());
+        data.lastTeleportTime = System.currentTimeMillis();
 
         //Fixing potential exploit/bug where players will phase and get teleported back
         data.locations.locations.clear();
@@ -46,74 +47,75 @@ public class PhaseListener implements Listener {
 
         //This means the player has teleported
         if(data.getLastTeleport() != null && event.getTo().equals(data.getLastTeleport())) {
-            data.setLastTeleport(null);
+            //Just making sure duplicate location attempts do not return for bypass
+            if(timestamp - data.lastTeleportTime > 2000L) data.setLastTeleport(null);
+            else {
+                return;
+            }
+        }
+
+        Player player = event.getPlayer();
+
+        if (player.getAllowFlight()
+                || event.getTo().getWorld().getUID() != event.getFrom().getWorld().getUID()
+                || player.getVehicle() != null
+                || !FunkePhase.INSTANCE.phaseEnabled
+                || timestamp - data.lastDoorSwing < 500) {
             return;
         }
 
-        FunkePhase.INSTANCE.getService().execute(() -> {
-            Player player = event.getPlayer();
+        if (event.getFrom().distanceSquared(event.getTo())
+                > (FunkePhase.INSTANCE.getMaxMove() * FunkePhase.INSTANCE.getMaxMove())) {
+            event.setCancelled(true);
+            return;
+        }
 
-            if (player.getAllowFlight()
-                    || event.getTo().getWorld().getUID() != event.getFrom().getWorld().getUID()
-                    || player.getVehicle() != null
-                    || !FunkePhase.INSTANCE.phaseEnabled
-                    || timestamp - data.lastDoorSwing < 500) {
-                return;
-            }
+        final float minX = (float) Math.min(event.getFrom().getX(), event.getTo().getX()),
+                minY = (float) Math.min(event.getFrom().getY(), event.getTo().getY()),
+                minZ = (float) Math.min(event.getFrom().getZ(), event.getTo().getZ()),
+                maxX = (float) Math.max(event.getFrom().getX(), event.getTo().getX()),
+                maxY = (float) Math.max(event.getFrom().getY(), event.getTo().getY()),
+                maxZ = (float) Math.max(event.getFrom().getZ(), event.getTo().getZ());
 
-            if (event.getFrom().distanceSquared(event.getTo())
-                    > (FunkePhase.INSTANCE.getMaxMove() * FunkePhase.INSTANCE.getMaxMove())) {
-                event.setCancelled(true);
-                return;
-            }
+        final SimpleCollisionBox box = new SimpleCollisionBox(minX, minY, minZ, maxX, maxY + 1.8f, maxZ)
+                .shrink(0.05f, 0.05f, 0.05f);
 
-            final float minX = (float) Math.min(event.getFrom().getX(), event.getTo().getX()),
-                    minY = (float) Math.min(event.getFrom().getY(), event.getTo().getY()),
-                    minZ = (float) Math.min(event.getFrom().getZ(), event.getTo().getZ()),
-                    maxX = (float) Math.max(event.getFrom().getX(), event.getTo().getX()),
-                    maxY = (float) Math.max(event.getFrom().getY(), event.getTo().getY()),
-                    maxZ = (float) Math.max(event.getFrom().getZ(), event.getTo().getZ());
+        int x1 = (int) Math.floor(box.xMin);
+        int y1 = (int) Math.floor(box.yMin);
+        int z1 = (int) Math.floor(box.zMin);
+        int x2 = (int) Math.ceil(box.xMax);
+        int y2 = (int) Math.ceil(box.yMax);
+        int z2 = (int) Math.ceil(box.zMax);
 
-            final SimpleCollisionBox box = new SimpleCollisionBox(minX, minY, minZ, maxX, maxY + 1.8f, maxZ)
-                    .shrink(0.05f, 0.05f, 0.05f);
+        for (int x = x1; x <= x2; ++x) {
+            for (int y = y1; y <= y2; ++y) {
+                for (int z = z1; z <= z2; ++z) {
+                    Block block;
+                    Material material;
+                    if ((block = Helper.getBlockAt(event.getTo().getWorld(), x, y, z)) != null
+                            && (material = block.getType()) != AIR
+                            && Materials.checkFlag(material, Materials.SOLID)
+                            && !FunkePhase.INSTANCE.getExcludedBlocks().contains(material)) {
+                        CollisionBox blockBox = BlockData.getData(material)
+                                .getBox(block, ProtocolVersion.getGameVersion());
 
-            int x1 = (int) Math.floor(box.xMin);
-            int y1 = (int) Math.floor(box.yMin);
-            int z1 = (int) Math.floor(box.zMin);
-            int x2 = (int) Math.ceil(box.xMax);
-            int y2 = (int) Math.ceil(box.yMax);
-            int z2 = (int) Math.ceil(box.zMax);
+                        if (blockBox.isIntersected(box)) {
+                            Location setback = findSetback(data);
 
-            for (int x = x1; x <= x2; ++x) {
-                for (int y = y1; y <= y2; ++y) {
-                    for (int z = z1; z <= z2; ++z) {
-                        Block block;
-                        Material material;
-                        if ((block = Helper.getBlockAt(event.getTo().getWorld(), x, y, z)) != null
-                                && (material = block.getType()) != AIR
-                                && Materials.checkFlag(material, Materials.SOLID)
-                                && !FunkePhase.INSTANCE.getExcludedBlocks().contains(material)) {
-                            CollisionBox blockBox = BlockData.getData(material)
-                                    .getBox(block, ProtocolVersion.getGameVersion());
-
-                            if (blockBox.isIntersected(box)) {
-                                Location setback = findSetback(data);
-
-                                if (setback != null) {
-                                    setback.setPitch(event.getTo().getPitch());
-                                    setback.setYaw(event.getTo().getYaw());
-                                }
-                                event.getPlayer().teleport(setback != null ? setback : event.getFrom());
-                                FunkePhase.INSTANCE.alert(event.getPlayer());
-                                return;
+                            if (setback != null) {
+                                setback.setPitch(event.getTo().getPitch());
+                                setback.setYaw(event.getTo().getYaw());
                             }
+                            event.getPlayer().teleport(setback != null ? setback : event.getFrom());
+                            FunkePhase.INSTANCE.alert(event.getPlayer());
+                            return;
                         }
                     }
                 }
             }
+        }
 
-            data.locations.addLocation(event.getFrom().clone());
-        });
+        data.locations.addLocation(event.getFrom().clone());
     }
 
     @EventHandler(ignoreCancelled = true)
